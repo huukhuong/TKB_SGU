@@ -1,13 +1,13 @@
 <?php
 require_once './simple_html_dom.php';
 require_once './Course.php';
-$id = ""; 
-if(isset($_GET['mssv'])){
+$id = "3119410215"; 
+/* if(isset($_GET['mssv'])){
     $id = $_GET['mssv'];
 }
 else{
     return;
-}
+} */
 $html = file_get_html("http://thongtindaotao.sgu.edu.vn/Default.aspx?page=thoikhoabieu&sta=1&id=$id");
 $root = $html->find('.grid-roll2', 0);
 $root = $root->plaintext;
@@ -171,7 +171,15 @@ function getdanhsachtiet($s){
     GLOBAL $tietkt ;
     $tietbd = [];
     $tietkt = [];
-    if(strlen($s) == 2){
+    for($l = 0 ; $l < strlen($s) /2 ; $l++){
+        $temp =  $s[$l];
+        $tietbd[] = $temp;
+    }
+    for($l = strlen($s)/2 ; $l < strlen($s) ; $l++){
+        $temp =  $s[$l];
+        $tietkt[] = $temp;
+    }
+   /*  if(strlen($s) == 2){
         $temp =  $s[0];
         $temp2 = $s[1];
         $tietbd[] = $temp;
@@ -200,7 +208,7 @@ function getdanhsachtiet($s){
         $tietkt[] = $temp4;
         $tietkt[] = $temp5;
         $tietkt[] = $temp6;
-    }
+    } */
 }
 
 foreach($root as $str){
@@ -213,9 +221,9 @@ foreach($root as $str){
     for($k = 0 ; $k <sizeof($vec); $k++){
         $arr =[
             "name" => $name,
-            "day" => $vec[0],
-            "start" => $tietbd[0],
-            "total" => $tietkt[0],
+            "day" => $vec[$k],
+            "start" => $tietbd[$k],
+            "total" => $tietkt[$k],
             "room" => "..."
         ];
         $mh[] = $arr;
