@@ -163,6 +163,9 @@ function  getThutiet($s) {
 }
 
 function getdanhsachtiet($s){
+    if(strlen($s) == 3){
+        $s = substr($s, 0, 2);
+    }
     GLOBAL $tietbd ;
     GLOBAL $tietkt ;
     $tietbd = [];
