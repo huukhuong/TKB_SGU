@@ -1,22 +1,23 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-table, td, th {
-    border: 1px solid #414141;
+table, tr, td {
+    border: 1px solid #333;
 }
 
-td {
-    width: 200px;
-    height: 45px;
-    font-size: .8rem !important;
+table {
+    border-collapse: collapse;
 }
 
-button {
-    background-color: rgb(204, 42, 42);
+td div {
+    min-height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn {
     border: none;
     color: white;
     font-weight: bold;
@@ -30,18 +31,64 @@ button {
     transition: all .2s linear;
 }
 
-button:hover {
+#btnBack {
+    background-color: rgb(0, 167, 50);
+}
+
+#btnBack:hover {
+    background-color: rgb(0, 184, 55);
+}
+
+#btnSaveImage {
+    background-color: rgb(204, 42, 42);
+}
+
+#btnSaveImage:hover {
     background-color: rgb(235, 69, 69);
 }
 
-.main {
-    min-width: 1400px;
+#studentInfo {
+    text-align: center;
+    padding: 4px;
+    min-width: 1268px;
+}
+
+.thead_td, .stt {
+    min-width: 180px;
+    text-align: center;
+    padding: 6px 0;
+    background-color: #2D8ECE;
+    color: #fff;
+    font-weight: bold;
+}
+
+.stt {
+    width: 100px;
+}
+
+.course {
+    vertical-align: middle;
+    background-color: #F5F5DC;
+}
+
+.text-color {
+    color: #31755E;
+    font-weight: bold;
+}
+
+.text-mutted {
+    color: #80808C;
+    font-weight: bold;
+}
+
+.space_left {
+    margin-left: 10px;
+}
+
+#capture {
     display: flex;
     justify-content: center;
-    position: relative;
-    flex-direction: row;
-    min-height: 650px;
-    padding: 10px;
+    flex-direction: column;
 }
 
 #loading {
@@ -60,51 +107,4 @@ button:hover {
 #loading img {
     width: 120px;
     height: auto;
-}
-
-.table, .table_absolute {
-    margin-top: 40px;
-    border-collapse: collapse;
-    position: absolute;
-}
-
-.header, .header1 {
-    background-color: #2D8ECE;
-    color: #fff;
-    font-size: 1rem;
-    font-weight: bold;
-    padding: 2px 0;
-    text-align: center;
-}
-
-.header1 {
-    width: 120px !important;
-}
-
-.course {
-    vertical-align: middle;
-    text-align: start;
-    padding: 0 4px;
-    background-color: #F5F5DC;
-    position: relative;
-    z-index: 5;
-}
-
-.cell {
-    position: absolute;
-    border: 0;
-}
-
-.text-color {
-    color: #31755E;
-    font-weight: bold;
-}
-
-.text-mutted {
-    color: #80808C;
-    font-weight: bold;
-}
-
-.space_left {
-    margin-left: 10px;
 }

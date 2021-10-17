@@ -20,7 +20,7 @@ array_pop($root);
 $fakedata = $root;
 // list môn học
 $mh = [];
-// vec gì của tml Kiệt code ấy ~~
+// vec gì của tml Kiệt code ấy ~.~
 $vec = [];
 //danh sách tiết bắt đầu
 $tietbd = [];
