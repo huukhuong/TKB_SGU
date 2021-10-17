@@ -12,7 +12,7 @@ $html = file_get_html("http://thongtindaotao.sgu.edu.vn/Default.aspx?page=thoikh
 $root = $html->find('.grid-roll2', 0);
 $root = $root->plaintext;
 $root = str_replace('  ', '', $root);
-$root = str_replace('x', ' ', $root); // fix clc
+$root = str_replace('x', ' ', $root); // fix chất lượng cao , clc có dấu x 
 $root = explode("DSSV", $root);
 array_pop($root);
 
@@ -26,6 +26,9 @@ $vec = [];
 $tietbd = [];
 // danh sách số tiết
 $sotiet = [];
+//danh sách phòng
+$listroom=[];
+
 function getTenmonHoc($str)
 {
     // input ="841047 Công nghệ phần mềm014DCT1191 4
@@ -127,7 +130,29 @@ function getListDays($str)
     }
     return $list;
 }
+ 
+// Lấy vị trí của dấu chấm
+function getIndexDots($str)
+{
+    $list = [];
+    for ($i = 0; $i < strlen($str); $i++) {
+        if ($str[$i] == '.') {
+            $list[] = $i;
+        }
+    }
+    return $list;
+}
 
+function getRoom($str){
+    $listroom=[];
+    $listdots = getIndexDots($str);
+    for($index = 0 ; $index < sizeof($listdots); $index++){
+        $tmp = substr($str,$listdots[$index]-1,6);
+        $listroom[] = $tmp;
+    }
+    return $listroom;
+    
+}
 function cutNumber($str)
 {
     // input: BaSáuBa416238C.E402C.E4021154111541123456789012345123456789012345DSSV
@@ -218,13 +243,22 @@ foreach($root as $str){
     $cutDuThua = catBoDuThua($cutname);
     $vec = getlistDay($cutDuThua);
     getdanhsachtiet(getThutiet($cutDuThua));
+    // BaSáuBa416238C.E402C.E4021154111541123456789012345123456789012345DSSV
+    $tm = getThu($cutDuThua);
+    $cutDuThua =  str_replace($tm, '', $cutDuThua); 
+    //416238C.E402C.E4021154111541123456789012345123456789012345DSSV
+    $tm = getThutiet($cutDuThua);
+    $cutDuThua =  str_replace($tm, '', $cutDuThua); 
+    //C.E402C.E4021154111541123456789012345123456789012345DSSV
+    $listroom = getRoom($cutDuThua);
+
     for($k = 0 ; $k <sizeof($vec); $k++){
         $arr =[
             "name" => $name,
             "day" => $vec[$k],
             "start" => $tietbd[$k],
             "total" => $tietkt[$k],
-            "room" => "..."
+            "room" => $listroom[$k]
         ];
         $mh[] = $arr;
     }
