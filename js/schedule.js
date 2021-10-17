@@ -87,6 +87,7 @@ function drawSchedule(arr) {
         }
     }
 }
+
 $('#btnSaveImage').click(function () {
     html2canvas($("#capture")[0]).then(canvas => {
         document.body.appendChild(canvas)
@@ -97,4 +98,8 @@ $('#btnSaveImage').click(function () {
         link.click();
         link.delete;
     });
-})
+});
+
+$('#btnBack').click(function() {
+    window.history.back();
+});
