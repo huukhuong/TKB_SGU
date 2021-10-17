@@ -163,8 +163,9 @@ function  getThutiet($s) {
 }
 
 function getdanhsachtiet($s){
-    if(strlen($s) == 3){
-        $s = substr($s, 0, 2);
+    if(strlen($s) % 2 != 0){
+        $s = substr($s, 0, strlen($s) -1 );
+        echo $s;
     }
     GLOBAL $tietbd ;
     GLOBAL $tietkt ;
@@ -209,66 +210,7 @@ foreach($root as $str){
     $cutDuThua = catBoDuThua($cutname);
     $vec = getlistDay($cutDuThua);
     getdanhsachtiet(getThutiet($cutDuThua));
-    if(sizeof($vec) == 2){
-        $arr =[
-            "name" => $name,
-            "day" => $vec[0],
-            "start" => $tietbd[0],
-            "total" => $tietkt[0],
-            "room" => "..."
-        ];
-        $arr1 =[
-            "name" => $name,
-            "day" => $vec[1],
-            "start" => $tietbd[1],
-            "total" => $tietkt[1],
-            "room" => "..."
-        ];
-        $mh[] = $arr;
-        $mh[] = $arr1;
-        
-       /*  //
-         $course = new Course($name,$vec[0],$tietbd[0],$tietkt[0],"...");
-         $course2 = new Course($name,$vec[1],$tietbd[1],$tietkt[1],"...");
-         $mh[] = $course;
-         $mh[] = $course2; */
-    }
-    else if(sizeof($vec) == 3){
-
-        $arr =[
-            "name" => $name,
-            "day" => $vec[0],
-            "start" => $tietbd[0],
-            "total" => $tietkt[0],
-            "room" => "..."
-        ];
-        $arr1 =[
-            "name" => $name,
-            "day" => $vec[1],
-            "start" => $tietbd[1],
-            "total" => $tietkt[1],
-            "room" => "..."
-        ];
-        $arr2 =[
-            "name" => $name,
-            "day" => $vec[2],
-            "start" => $tietbd[2],
-            "total" => $tietkt[2],
-            "room" => "..."
-        ];
-        $mh[] = $arr;
-        $mh[] = $arr1;
-        $mh[] = $arr2;
-       /*  $course = new Course($name,$vec[0],$tietbd[0],$tietkt[0],"...");
-         $course2 = new Course($name,$vec[1],$tietbd[1],$tietkt[1],"...");
-         $course3 = new Course($name,$vec[2],$tietbd[2],$tietkt[2],"...");
-         $mh[] = $course;
-         $mh[] = $course2;
-         $mh[] = $course3; */
-    }
-    else{
-        /* $course = new Course($name,$vec[0],$tietbd[0],$tietkt[0],"...");
-        $mh[] = $course; */
+    for($k = 0 ; $k <sizeof($vec); $k++){
         $arr =[
             "name" => $name,
             "day" => $vec[0],
