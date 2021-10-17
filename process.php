@@ -12,7 +12,7 @@ $html = file_get_html("http://thongtindaotao.sgu.edu.vn/Default.aspx?page=thoikh
 $root = $html->find('.grid-roll2', 0);
 $root = $root->plaintext;
 $root = str_replace('  ', '', $root);
-$root = str_replace('x', ' ', $root); // fix chất lượng cao , clc có dấu x 
+
 $root = explode("DSSV", $root);
 array_pop($root);
 
@@ -294,6 +294,7 @@ foreach ($root as $str) {
     global $vec;
     $name = getTenmonHoc($str);
     $cutname = catBoTenMonHoc($str, $name);
+    $cutname = str_replace('x', ' ', $cutname); // fix chất lượng cao , clc có dấu x 
     $cutDuThua = catBoDuThua($cutname);
     $vec = getlistDay($cutDuThua);
     getdanhsachtiet(getThutiet($cutDuThua));
