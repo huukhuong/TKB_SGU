@@ -1,7 +1,7 @@
 <?php
 require_once './simple_html_dom.php';
 require_once './Course.php';
-$id = "3119410215"; 
+$id = "3118411023";
 /* if(isset($_GET['mssv'])){
     $id = $_GET['mssv'];
 }
@@ -27,7 +27,7 @@ $tietbd = [];
 // danh sách số tiết
 $sotiet = [];
 //danh sách phòng
-$listroom=[];
+$listroom = [];
 
 function getTenmonHoc($str)
 {
@@ -108,7 +108,7 @@ function getlistDay($s)
         $vec[] = $temp;
         $vec[] = $temp2;
     } else {
-        $temp = substr($s, 0, $list[1]-$list[0]);
+        $temp = substr($s, 0, $list[1] - $list[0]);
         $temp2 = substr($s, $list[1], $list[2] - $list[1]);
         $temp3 = substr($s, $list[2], strlen($s));
         $vec[] = $temp;
@@ -118,7 +118,7 @@ function getlistDay($s)
     return $vec;
     // trả về 1 arraylist các thứ
 }
- 
+
 // Lấy vị trí của các từ in hoa trong chuỗi
 function getListDays($str)
 {
@@ -130,7 +130,7 @@ function getListDays($str)
     }
     return $list;
 }
- 
+
 // Lấy vị trí của dấu chấm
 function getIndexDots($str)
 {
@@ -143,15 +143,24 @@ function getIndexDots($str)
     return $list;
 }
 
-function getRoom($str){
-    $listroom=[];
+function getRoom($str)
+{
+    $tm = getThu($str);
+    $str =  str_replace($tm, '', $str);
+    //416238C.E402C.E4021154111541123456789012345123456789012345DSSV
+    $tm = getThutiet($str);
+    if (strlen($tm) % 2 != 0) {
+        $tm = substr($tm, 0, strlen($tm) - 1); // fix cơ sở 1 & 2.
+    }
+    $str =  str_replace($tm, '', $str);
+    //C.E402C.E4021154111541123456789012345123456789012345DSSV
+    $listroom = [];
     $listdots = getIndexDots($str);
-    for($index = 0 ; $index < sizeof($listdots); $index++){
-        $tmp = substr($str,$listdots[$index]-1,6);
+    for ($index = 0; $index < sizeof($listdots); $index++) {
+        $tmp = substr($str, $listdots[$index] - 1, 6);
         $listroom[] = $tmp;
     }
     return $listroom;
-    
 }
 function cutNumber($str)
 {
@@ -167,7 +176,8 @@ function cutNumber($str)
     return $temp;
 }
 
-function  getThutiet($s) {
+function  getThutiet($s)
+{
     // input = 416238C.E402C.E4021154111541123456789012345123456789012345DSSV
     $i = 0;
     for ($i = 0; $i < strlen($s); $i++) {
@@ -187,24 +197,24 @@ function  getThutiet($s) {
     // out = 416238
 }
 
-function getdanhsachtiet($s){
-    if(strlen($s) % 2 != 0){
-        $s = substr($s, 0, strlen($s) -1 );
-        echo $s;
+function getdanhsachtiet($s)
+{
+    if (strlen($s) % 2 != 0) {
+        $s = substr($s, 0, strlen($s) - 1);
     }
-    GLOBAL $tietbd ;
-    GLOBAL $tietkt ;
+    global $tietbd;
+    global $tietkt;
     $tietbd = [];
     $tietkt = [];
-    for($l = 0 ; $l < strlen($s) /2 ; $l++){
+    for ($l = 0; $l < strlen($s) / 2; $l++) {
         $temp =  $s[$l];
         $tietbd[] = $temp;
     }
-    for($l = strlen($s)/2 ; $l < strlen($s) ; $l++){
+    for ($l = strlen($s) / 2; $l < strlen($s); $l++) {
         $temp =  $s[$l];
         $tietkt[] = $temp;
     }
-   /*  if(strlen($s) == 2){
+    /*  if(strlen($s) == 2){
         $temp =  $s[0];
         $temp2 = $s[1];
         $tietbd[] = $temp;
@@ -236,24 +246,17 @@ function getdanhsachtiet($s){
     } */
 }
 
-foreach($root as $str){
-    GLOBAL $vec;
+foreach ($root as $str) {
+    global $vec;
     $name = getTenmonHoc($str);
     $cutname = catBoTenMonHoc($str, $name);
     $cutDuThua = catBoDuThua($cutname);
     $vec = getlistDay($cutDuThua);
     getdanhsachtiet(getThutiet($cutDuThua));
     // BaSáuBa416238C.E402C.E4021154111541123456789012345123456789012345DSSV
-    $tm = getThu($cutDuThua);
-    $cutDuThua =  str_replace($tm, '', $cutDuThua); 
-    //416238C.E402C.E4021154111541123456789012345123456789012345DSSV
-    $tm = getThutiet($cutDuThua);
-    $cutDuThua =  str_replace($tm, '', $cutDuThua); 
-    //C.E402C.E4021154111541123456789012345123456789012345DSSV
     $listroom = getRoom($cutDuThua);
-
-    for($k = 0 ; $k <sizeof($vec); $k++){
-        $arr =[
+    for ($k = 0; $k < sizeof($vec); $k++) {
+        $arr = [
             "name" => $name,
             "day" => $vec[$k],
             "start" => $tietbd[$k],
@@ -263,4 +266,4 @@ foreach($root as $str){
         $mh[] = $arr;
     }
 }
-echo json_encode($mh,JSON_UNESCAPED_UNICODE);
+echo json_encode($mh, JSON_UNESCAPED_UNICODE);
