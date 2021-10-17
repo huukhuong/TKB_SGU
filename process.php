@@ -184,7 +184,8 @@ function cutNumber($str)
 
 function  getThutiet($s)
 {
-    // input = 416238C.E402C.E4021154111541123456789012345123456789012345DSSV
+    // input = BaBa416238C.E402C.E4021154111541123456789012345123456789012345DSSV
+   
     $i = 0;
     for ($i = 0; $i < strlen($s); $i++) {
         if (is_numeric($s[$i])) {
@@ -193,33 +194,70 @@ function  getThutiet($s)
     }
     $temp = substr($s, 0, $i);
     $s  = str_replace($temp, "", $s);
-    for ($i = 0; $i < strlen($s); $i++) {
+    $listroom = [];
+    $listdots = getIndexDots($s);
+    for ($i = 0; $i < $listdots[0]; $i++) {
         if (!is_numeric($s[$i])) {
             break;
         }
     }
     $temp = substr($s, 0, $i);
+    
     return $temp;
     // out = 416238
 }
 
 function getdanhsachtiet($s)
-{
-    if (strlen($s) % 2 != 0) {
-        $s = substr($s, 0, strlen($s) - 1);
-    }
+{ 
+    $indexof11 = strpos($s,"11");
+    
+    $temp = "";
     global $tietbd;
     global $tietkt;
     $tietbd = [];
     $tietkt = [];
-    for ($l = 0; $l < strlen($s) / 2; $l++) {
-        $temp =  $s[$l];
-        $tietbd[] = $temp;
+    if($indexof11 > 0){
+      /*   echo "input ". $s;
+    echo "<br>";
+    echo "index" . $indexof11;
+    echo "<br>"; */
+        for($idx = 0 ; $idx < strlen($s);  $idx++){
+            if($idx != $indexof11 && $idx != strlen($s)){
+                $temp .= $s[$idx] . '_';
+            }
+            else{
+                $temp .= $s[$idx] . '';
+            }
+        }
+        $s = $temp;
+      /*   echo "Temp =".$temp;
+        echo "<br>"; */
+        $tiet = explode('_',$s);
+        for ($l = 0; $l < sizeof($tiet) / 2; $l++) {
+            $temp =  $tiet[$l];
+            $tietbd[] = $temp;
+        }
+        for ($l = sizeof($tiet) / 2; $l < sizeof($tiet); $l++) {
+            $temp =  $tiet[$l];
+            $tietkt[] = $temp;
+        }
+        
     }
-    for ($l = strlen($s) / 2; $l < strlen($s); $l++) {
-        $temp =  $s[$l];
-        $tietkt[] = $temp;
+    else{
+        if (strlen($s) % 2 != 0) {
+            $s = substr($s, 0, strlen($s) - 1);
+        }
+        for ($l = 0; $l < strlen($s) / 2; $l++) {
+            $temp =  $s[$l];
+            $tietbd[] = $temp;
+        }
+        for ($l = strlen($s) / 2; $l < strlen($s); $l++) {
+            $temp =  $s[$l];
+            $tietkt[] = $temp;
+        }
     }
+
+   
     /*  if(strlen($s) == 2){
         $temp =  $s[0];
         $temp2 = $s[1];
