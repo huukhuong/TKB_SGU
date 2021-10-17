@@ -14,16 +14,55 @@ td {
     height: 45px;
 }
 
+button {
+    background-color: rgb(204, 42, 42);
+    border: none;
+    color: white;
+    font-weight: bold;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 1rem;
+    line-height: 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all .2s linear;
+}
+
+button:hover {
+    background-color: rgb(235, 69, 69);
+}
+
 .main {
-    height: 150vh;
     min-width: 1400px;
-    padding: 50px 0;
     display: flex;
     justify-content: center;
     position: relative;
+    flex-direction: row;
+    min-height: 650px;
+    padding: 10px;
+}
+
+#loading {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ffffff52;
+    position: fixed;
+    z-index: 100;
+    align-items: center;
+    justify-content: center;
+    display: none;
+}
+
+#loading img {
+    width: 120px;
+    height: auto;
 }
 
 .table, .table_absolute {
+    margin-top: 40px;
     border-collapse: collapse;
     position: absolute;
 }
@@ -63,4 +102,8 @@ td {
 .text-mutted {
     color: #80808C;
     font-weight: bold;
+}
+
+.space_left {
+    margin-left: 10px;
 }

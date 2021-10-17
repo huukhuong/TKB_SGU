@@ -17,7 +17,14 @@ $id = $_POST['id'];
 </head>
 
 <body>
-    <div class="main">
+    <div style="text-align: center; padding-top: 20px">
+        <button id="btnSaveImage">Save image</button>
+    </div>
+    <div id="loading">
+        <img src="./img/loading.gif">
+    </div>
+    <div class="main" id="capture">
+        <div id="studentInfo" style="width: 100vw;text-align: center;"></div>
         <input type="hidden" id="id" value="<?= $id ?>">
         <table class="table">
             <thead>
@@ -51,6 +58,7 @@ $id = $_POST['id'];
     </div>
 
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>
     <script src="./js/schedule.js"></script>
 </body>
 
