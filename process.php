@@ -1,13 +1,13 @@
 <?php
-require_once './simple_html_dom.php';
-require_once './Course.php';
-$id = "3119410215";
-/* if(isset($_GET['mssv'])){
-    $id = $_GET['mssv'];
+require_once './models/simple_html_dom.php';
+require_once './models/Course.php';
+
+if (isset($_GET['id'])) {
+    $id = $_GET['id'];
+} else {
+    echo 'Chưa nhập mã sinh viên';
+    die();
 }
-else{
-    return;
-} */
 $html = file_get_html("http://thongtindaotao.sgu.edu.vn/Default.aspx?page=thoikhoabieu&sta=1&id=$id");
 $root = $html->find('.grid-roll2', 0);
 $root = $root->plaintext;
@@ -158,11 +158,10 @@ function getRoom($str)
     $listdots = getIndexDots($str);
     for ($index = 0; $index < sizeof($listdots); $index++) {
         $valueOflistdots = $listdots[$index];
-        if($str[$valueOflistdots+1] == 'S'){ // fix lỗi sân bóng đá , sân quốc phòng không hiện đủ thông tin
+        if ($str[$valueOflistdots + 1] == 'S') { // fix lỗi sân bóng đá , sân quốc phòng không hiện đủ thông tin
             $tmp = substr($str, $listdots[$index] - 1, 7);
             $listroom[] = $tmp;
-        }
-        else{
+        } else {
             $tmp = substr($str, $listdots[$index] - 1, 6);
             $listroom[] = $tmp;
         }

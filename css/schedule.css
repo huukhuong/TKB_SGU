@@ -1,0 +1,66 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+table, td, th {
+    border: 1px solid #414141;
+}
+
+td {
+    width: 220px;
+    height: 45px;
+}
+
+.main {
+    height: 150vh;
+    min-width: 1400px;
+    padding: 50px 0;
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+
+.table, .table_absolute {
+    border-collapse: collapse;
+    position: absolute;
+}
+
+.header, .header1 {
+    background-color: #2D8ECE;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: bold;
+    padding: 2px 0;
+    text-align: center;
+}
+
+.header1 {
+    width: 120px !important;
+}
+
+.course {
+    vertical-align: middle;
+    text-align: start;
+    padding: 0 4px;
+    background-color: #F5F5DC;
+    position: relative;
+    z-index: 5;
+}
+
+.cell {
+    position: absolute;
+    border: 0;
+}
+
+.text-color {
+    color: #31755E;
+    font-weight: bold;
+}
+
+.text-mutted {
+    color: #80808C;
+    font-weight: bold;
+}
