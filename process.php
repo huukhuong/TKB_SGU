@@ -1,8 +1,14 @@
 <?php
 require_once './simple_html_dom.php';
 require_once './Course.php';
-
-$html = file_get_html("http://thongtindaotao.sgu.edu.vn/Default.aspx?page=thoikhoabieu&sta=1&id=3119410215");
+$id = ""; 
+if(isset($_GET['mssv'])){
+    $id = $_GET['mssv'];
+}
+else{
+    return;
+}
+$html = file_get_html("http://thongtindaotao.sgu.edu.vn/Default.aspx?page=thoikhoabieu&sta=1&id=$id");
 $root = $html->find('.grid-roll2', 0);
 $root = $root->plaintext;
 $root = str_replace('  ', '', $root);
@@ -15,7 +21,10 @@ $fakedata = $root;
 $mh = [];
 // vec gì của tml Kiệt code ấy ~~
 $vec = [];
-
+//danh sách tiết bắt đầu
+$tietbd = [];
+// danh sách số tiết
+$sotiet = [];
 function getTenmonHoc($str)
 {
     // input ="841047 Công nghệ phần mềm014DCT1191 4
@@ -105,7 +114,7 @@ function getlistDay($s)
     return $vec;
     // trả về 1 arraylist các thứ
 }
-
+ 
 // Lấy vị trí của các từ in hoa trong chuỗi
 function getListDays($str)
 {
@@ -132,10 +141,138 @@ function cutNumber($str)
     return $temp;
 }
 
-$str = '841047 Công nghệ phần mềm014DCT1191 4 01BaSáuBa416238C.E402C.E4021154111541123456789012345123456789012345DSSV';
-$name = getTenmonHoc($str);
-$cutname = catBoTenMonHoc($str, $name);
-$cutDuThua = catBoDuThua($cutname);
+function  getThutiet($s) {
+    // input = 416238C.E402C.E4021154111541123456789012345123456789012345DSSV
+    $i = 0;
+    for ($i = 0; $i < strlen($s); $i++) {
+        if (is_numeric($s[$i])) {
+            break;
+        }
+    }
+    $temp = substr($s, 0, $i);
+    $s  = str_replace($temp, "", $s);
+    for ($i = 0; $i < strlen($s); $i++) {
+        if (!is_numeric($s[$i])) {
+            break;
+        }
+    }
+    $temp = substr($s, 0, $i);
+    return $temp;
+    // out = 416238
+}
 
-echo '<pre>';
-print_r(getListDay($cutDuThua));
+function getdanhsachtiet($s){
+    GLOBAL $tietbd ;
+    GLOBAL $tietkt ;
+    $tietbd = [];
+    $tietkt = [];
+    if(strlen($s) == 2){
+        $temp =  $s[0];
+        $temp2 = $s[1];
+        $tietbd[] = $temp;
+        $tietkt[] = $temp2;
+    }
+    else if(strlen($s) == 4){
+        $temp =  $s[0];
+        $temp2 = $s[1];
+        $temp3 = $s[2];
+        $temp4 = $s[3];
+        $tietbd[] = $temp;
+        $tietbd[] = $temp2;
+        $tietkt[] = $temp3;
+        $tietkt[] = $temp4;
+    }
+    else{
+        $temp =  $s[0];
+        $temp2 = $s[1];
+        $temp3 = $s[2];
+        $temp4 = $s[3];
+        $temp5 = $s[4];
+        $temp6 = $s[5];
+        $tietbd[] = $temp;
+        $tietbd[] = $temp2;
+        $tietbd[] = $temp3;
+        $tietkt[] = $temp4;
+        $tietkt[] = $temp5;
+        $tietkt[] = $temp6;
+    }
+}
+
+foreach($root as $str){
+    GLOBAL $vec;
+    $name = getTenmonHoc($str);
+    $cutname = catBoTenMonHoc($str, $name);
+    $cutDuThua = catBoDuThua($cutname);
+    $vec = getlistDay($cutDuThua);
+    getdanhsachtiet(getThutiet($cutDuThua));
+    if(sizeof($vec) == 2){
+        $arr =[
+            "name" => $name,
+            "day" => $vec[0],
+            "start" => $tietbd[0],
+            "total" => $tietkt[0],
+            "room" => "..."
+        ];
+        $arr1 =[
+            "name" => $name,
+            "day" => $vec[1],
+            "start" => $tietbd[1],
+            "total" => $tietkt[1],
+            "room" => "..."
+        ];
+        $mh[] = $arr;
+        $mh[] = $arr1;
+        
+       /*  //
+         $course = new Course($name,$vec[0],$tietbd[0],$tietkt[0],"...");
+         $course2 = new Course($name,$vec[1],$tietbd[1],$tietkt[1],"...");
+         $mh[] = $course;
+         $mh[] = $course2; */
+    }
+    else if(sizeof($vec) == 3){
+
+        $arr =[
+            "name" => $name,
+            "day" => $vec[0],
+            "start" => $tietbd[0],
+            "total" => $tietkt[0],
+            "room" => "..."
+        ];
+        $arr1 =[
+            "name" => $name,
+            "day" => $vec[1],
+            "start" => $tietbd[1],
+            "total" => $tietkt[1],
+            "room" => "..."
+        ];
+        $arr2 =[
+            "name" => $name,
+            "day" => $vec[2],
+            "start" => $tietbd[2],
+            "total" => $tietkt[2],
+            "room" => "..."
+        ];
+        $mh[] = $arr;
+        $mh[] = $arr1;
+        $mh[] = $arr2;
+       /*  $course = new Course($name,$vec[0],$tietbd[0],$tietkt[0],"...");
+         $course2 = new Course($name,$vec[1],$tietbd[1],$tietkt[1],"...");
+         $course3 = new Course($name,$vec[2],$tietbd[2],$tietkt[2],"...");
+         $mh[] = $course;
+         $mh[] = $course2;
+         $mh[] = $course3; */
+    }
+    else{
+        /* $course = new Course($name,$vec[0],$tietbd[0],$tietkt[0],"...");
+        $mh[] = $course; */
+        $arr =[
+            "name" => $name,
+            "day" => $vec[0],
+            "start" => $tietbd[0],
+            "total" => $tietkt[0],
+            "room" => "..."
+        ];
+        $mh[] = $arr;
+    }
+}
+echo json_encode($mh,JSON_UNESCAPED_UNICODE);
