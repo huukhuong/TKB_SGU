@@ -54,7 +54,7 @@ button:hover {
     z-index: 100;
     align-items: center;
     justify-content: center;
-    display: none;
+    display: flex;
 }
 
 #loading img {

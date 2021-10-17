@@ -1,5 +1,4 @@
 drawBorder();
-$('#loading').css('display', 'flex');
 $.ajax({
     url: 'process.php',
     type: "GET",
