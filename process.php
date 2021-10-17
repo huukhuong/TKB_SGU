@@ -310,4 +310,18 @@ foreach ($root as $str) {
         $mh[] = $arr;
     }
 }
+
+$msv = $html->find('#ctl00_ContentPlaceHolder1_ctl00_lblContentMaSV', 0);
+$hoTen = $html->find('#ctl00_ContentPlaceHolder1_ctl00_lblContentTenSV', 0);
+$khoa = $html->find('#ctl00_ContentPlaceHolder1_ctl00_lblContentLopSV', 0);
+
+$arr = [
+    "name" => $msv->plaintext,
+    "day" => $hoTen->plaintext,
+    "start" => $khoa->plaintext,
+    "total" => "2",
+    "room" => "C.E402"
+];
+$mh[] = $arr;
+
 echo json_encode($mh, JSON_UNESCAPED_UNICODE);

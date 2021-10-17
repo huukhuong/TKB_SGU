@@ -1,4 +1,5 @@
 drawBorder();
+$('#loading').css('display', 'flex');
 $.ajax({
     url: 'process.php',
     type: "GET",
@@ -7,6 +8,7 @@ $.ajax({
         id: $('#id').val()
     },
     success: function (data) {
+        $('#loading').css('display', 'none');
         drawSchedule(data);
     }
 });
@@ -29,7 +31,16 @@ function drawBorder() {
     }
 }
 function drawSchedule(arr) {
-    for (let i = 0; i < arr.length; i++) {
+    let studentInfo = $('#studentInfo');
+    studentInfo.html(
+        '<span class="text-mutted">MSSV: </span>' +
+        '<span class="text-color">' + arr[arr.length - 1].name + '</span>' +
+        '<span class="text-mutted space_left">Họ tên: </span>' +
+        '<span class="text-color">' + arr[arr.length - 1].day + '</span>' +
+        '<span class="text-mutted space_left">Lớp: </span>' +
+        '<span class="text-color">' + arr[arr.length - 1].start + '</span>'
+    );
+    for (let i = 0; i < arr.length - 1; i++) {
         switch (arr[i].day) {
             case 'Hai':
                 arr[i].day = 2;
@@ -61,7 +72,7 @@ function drawSchedule(arr) {
 
         for (let j = 2; j < 8; j++) {
             let toDay = [];
-            for (let t = 0; t < arr.length; t++) {
+            for (let t = 0; t < arr.length - 1; t++) {
                 if (arr[t].day == j) {
                     toDay.push(arr[t]);
                 }
@@ -83,4 +94,16 @@ function drawSchedule(arr) {
         }
         table_body.append(row);
     }
+
+    $('#btnSaveImage').click(function () {
+        html2canvas($("#capture")[0]).then(canvas => {
+            document.body.appendChild(canvas)
+            $('canvas').css('display', 'none');
+            const link = document.createElement('a');
+            link.download = 'TKB.png';
+            link.href = canvas.toDataURL();
+            link.click();
+            link.delete;
+        });
+    })
 }
