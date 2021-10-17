@@ -1,7 +1,7 @@
 <?php
 require_once './simple_html_dom.php';
 require_once './Course.php';
-$id = "3118411023";
+$id = "3119410215";
 /* if(isset($_GET['mssv'])){
     $id = $_GET['mssv'];
 }
@@ -157,8 +157,15 @@ function getRoom($str)
     $listroom = [];
     $listdots = getIndexDots($str);
     for ($index = 0; $index < sizeof($listdots); $index++) {
-        $tmp = substr($str, $listdots[$index] - 1, 6);
-        $listroom[] = $tmp;
+        $valueOflistdots = $listdots[$index];
+        if($str[$valueOflistdots+1] == 'S'){ // fix lỗi sân bóng đá , sân quốc phòng không hiện đủ thông tin
+            $tmp = substr($str, $listdots[$index] - 1, 7);
+            $listroom[] = $tmp;
+        }
+        else{
+            $tmp = substr($str, $listdots[$index] - 1, 6);
+            $listroom[] = $tmp;
+        }
     }
     return $listroom;
 }
