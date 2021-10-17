@@ -10,8 +10,9 @@ table, td, th {
 }
 
 td {
-    width: 255px;
-        height: 50px;
+    width: 200px;
+    height: 45px;
+    font-size: .8rem !important;
 }
 
 button {
@@ -53,7 +54,7 @@ button:hover {
     z-index: 100;
     align-items: center;
     justify-content: center;
-    display: none;
+    display: flex;
 }
 
 #loading img {
