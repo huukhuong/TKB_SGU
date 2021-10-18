@@ -216,7 +216,7 @@ function getdanhsachtiet($s)
     global $tietkt;
     $tietbd = [];
     $tietkt = [];
-    if($indexof11 > 0){
+    if($indexof11 > -1){
       /*   echo "input ". $s;
     echo "<br>";
     echo "index" . $indexof11;

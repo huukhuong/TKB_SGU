@@ -53,7 +53,7 @@ function drawSchedule(arr) {
         }
     }
     let table_body = $('#tbody');
-    for (let i = 1; i <= 12; i++) {
+    for (let i = 1; i <= 15; i++) {
         let row = document.createElement('tr');
         for (let j = 1; j <= 7; j++) {
             let col = document.createElement('td');
