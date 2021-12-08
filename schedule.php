@@ -14,7 +14,10 @@ $id = $_POST['id'];
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Xem thời khóa biểu</title>
     <link rel="stylesheet" href="./css/schedule.css">
-    <?php include './favicon.php'; ?>
+    <?php 
+        include './favicon.php'; 
+        include './count.php';
+    ?>
 </head>
 
 <body>

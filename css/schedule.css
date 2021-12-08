@@ -10,6 +10,10 @@ table {
     border-collapse: collapse;
 }
 
+td {
+    width: 180px !important;
+}
+
 td div {
     min-height: 35px;
     display: flex;
