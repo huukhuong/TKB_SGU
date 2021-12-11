@@ -12,6 +12,9 @@ $.ajax({
 });
 
 function drawSchedule(arr) {
+    console.log("Dữ liệu trả về từ API:");
+    console.log(arr);
+    
     let studentInfo = $('#studentInfo');
     studentInfo.html(
         '<span class="text-mutted">MSSV: </span>' +
@@ -87,7 +90,10 @@ function drawSchedule(arr) {
 
         for (let j = 0; j < total - 1; j++) {
             start++;
-            document.getElementById(start + '_' + day).remove();
+            let row = document.getElementById(start + '_' + day)
+            if (row != null) {
+                row.remove();
+            }
         }
     }
 }

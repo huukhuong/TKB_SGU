@@ -11,9 +11,14 @@ if (isset($_GET['id'])) {
 $html = file_get_html("http://thongtindaotao.sgu.edu.vn/Default.aspx?page=thoikhoabieu&sta=1&id=$id");
 $root = $html->find('.grid-roll2', 0);
 $root = $root->plaintext;
+
 $root = str_replace('  ', '', $root);
-$root = str_replace('x', ' ', $root); // fix chất lượng cao , clc có dấu x 
+$root = str_replace('DSSVDSSV', 'DSSV', $root);
+
+$root = str_replace('x', ' ', $root); // fix chất lượng cao , clc có dấu x
+
 $root = explode("DSSV", $root);
+
 array_pop($root);
 
 // thay fakedat thành root
@@ -70,6 +75,10 @@ function catBoDuThua($str)
     if (is_numeric($str[0]) && is_numeric($str[1])) {
         $str[0] = ' ';
         $str[1] = ' ';
+        $str = trim($str, ' ');
+    }
+    elseif (is_numeric($str[0]) && !is_numeric($str[1])) {
+        $str[0] = ' ';
         $str = trim($str, ' ');
     }
     return $str;
