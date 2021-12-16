@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<br /><!DOCTYPE html>
 <html>
 
 <head>
@@ -24,7 +24,9 @@
                     <input type="text" class="form-control" name="id" required>
                 </div>
                 <div style="text-align: center;">
-                    <input class="btn btn-primary" type="submit" value="Xem thời khóa biểu">
+                    <input class="btn btn-primary" type="submit" value="Xem thời khóa biểu"
+                    <br />
+                    <p><a href="#baoloi">Liên hệ báo lỗi</a></p>
                 </div>
             </form>
         </div>
@@ -36,7 +38,7 @@
             $query = mysqli_query($conn, $sql);
             $row = mysqli_fetch_assoc($query);
             
-            echo 'Số lượt truy cập: ' . $row['countNum'];
+            echo 'Số lượt truy cập: ' . number_format($row['countNum'], 0, '.', '.');
             ?>
         </div>
         <div class="py-5">
@@ -48,11 +50,13 @@
             <h5 class="text-center">
                 Nếu chức năng lưu ảnh bị lỗi vui lòng chụp màn hình thủ công
             </h5>
-            <h5 class="text-center mt-5">Liên hệ báo lỗi:</h5>
+            <div class="alert alert-success mt-2">
+            <h5 id="baoloi" class="text-center">Liên hệ báo lỗi:</h5>
             <h6 class="text-center">Võ Hoàng Kiệt - K19 CNTT | <a target="_blank" href="https://www.facebook.com/thekids.1002/">Liên hệ</a></h6>
             <h6 class="text-center">Trần Hữu Khương - K19 CNTT | <a target="_blank" href="https://www.facebook.com/kayden.khuong/">Liên hệ</a></h6>
         </div>
 
+    </div>
     </div>
 </body>
 

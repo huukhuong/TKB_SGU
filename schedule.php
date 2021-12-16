@@ -31,7 +31,7 @@ $id = $_POST['id'];
     <div id="capture">
         <table id="table">
             <thead>
-                <td class="stt">
+                <td class="stt" style="width: 100px; max-width: 100px; min-width: 100px;">
                     <div></div>
                 </td>
                 <td class="thead_td">Thứ Hai</td>

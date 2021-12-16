@@ -25,6 +25,8 @@ function drawSchedule(arr) {
         '<span class="text-color">' + arr[arr.length - 1].start + '</span>'
     );
     for (let i = 0; i < arr.length - 1; i++) {
+        arr[i].start = parseInt(arr[i].start);
+        arr[i].total = parseInt(arr[i].total);
         switch (arr[i].day) {
             case 'Hai':
                 arr[i].day = 2;
@@ -46,6 +48,7 @@ function drawSchedule(arr) {
                 break;
         }
     }
+    // sort từ t2 -> t7
     for (let i = 0; i < arr.length - 2; i++) {
         for (let j = i + 1; j < arr.length - 1; j++) {
             if (arr[i].day > arr[j].day) {
@@ -55,7 +58,18 @@ function drawSchedule(arr) {
             }
         }
     }
+    // sort theo total, nhưng giữ nguyên thứ
+    for (let i = 0; i < arr.length - 2; i++) {
+        for (let j = i + 1; j < arr.length - 1; j++) {
+            if (arr[i].total < arr[j].total && arr[i].day == arr[j].day) {
+                let temp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = temp;
+            }
+        }
+    }
     let table_body = $('#tbody');
+    // vẽ 12 hàng ngang
     for (let i = 1; i <= 12; i++) {
         let row = document.createElement('tr');
         for (let j = 1; j <= 7; j++) {
@@ -70,10 +84,11 @@ function drawSchedule(arr) {
         }
         table_body.append(row);
     }
+    
     for (let i = 0; i < arr.length - 1; i++) {
-        let start = arr[i].start;
-        let day = arr[i].day;
-        let total = arr[i].total;
+        let start = arr[i].start * 1;
+        let day = arr[i].day * 1;
+        let total = arr[i].total * 1;
 
         if(start == null) {
             continue;
@@ -82,6 +97,9 @@ function drawSchedule(arr) {
         let idCell = start + '_' + day;
         let cell = document.getElementById(idCell);
         if(cell != null) {
+            if(cell.className == 'course') {
+                continue;
+            }
             cell.rowSpan = arr[i].total;
             cell.innerHTML = "<span class='text-color'>" + arr[i].name + "</span>" + "<br />" +
             "<i class='text-mutted'>Phòng: </i>" +

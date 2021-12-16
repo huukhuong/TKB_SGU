@@ -57,8 +57,9 @@ td div {
     min-width: 1268px;
 }
 
-.thead_td, .stt {
+.thead_td {
     min-width: 180px;
+    max-width: 180px;
     text-align: center;
     padding: 6px 0;
     background-color: #2D8ECE;
@@ -68,6 +69,11 @@ td div {
 
 .stt {
     width: 100px;
+     text-align: center;
+    padding: 6px 0;
+    background-color: #2D8ECE;
+    color: #fff;
+    font-weight: bold;
 }
 
 .course {
