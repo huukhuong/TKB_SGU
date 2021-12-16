@@ -81,12 +81,13 @@ function drawSchedule(arr) {
 
         let idCell = start + '_' + day;
         let cell = document.getElementById(idCell);
-        cell.rowSpan = arr[i].total;
-
-        cell.innerHTML = "<span class='text-color'>" + arr[i].name + "</span>" + "<br />" +
+        if(cell != null) {
+            cell.rowSpan = arr[i].total;
+            cell.innerHTML = "<span class='text-color'>" + arr[i].name + "</span>" + "<br />" +
             "<i class='text-mutted'>Phòng: </i>" +
             "<span class='text-color'>" + arr[i].room + "</span>" + "<br />";
-        cell.className = 'course';
+            cell.className = 'course';
+        }
 
         for (let j = 0; j < total - 1; j++) {
             start++;
