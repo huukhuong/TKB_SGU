@@ -27,7 +27,6 @@ function drawSchedule(arr) {
     for (let i = 0; i < arr.length - 1; i++) {
         arr[i].start = parseInt(arr[i].start);
         arr[i].total = parseInt(arr[i].total);
-        arr[i].teacher = 1001;
 
         switch (arr[i].day) {
             case 'Hai':
@@ -107,7 +106,7 @@ function drawSchedule(arr) {
                 "<i class='text-mutted'>Phòng: </i>" +
                 "<span class='text-color'>" + arr[i].room + "</span>" + "<br />" +
                 "<i class='text-mutted'>Giảng viên: </i>" +
-                "<span class='text-color'>" + arr[i].teacher + "</span>" + "<br />";
+                "<span class='text-color'>" + DSGV[parseInt(arr[i].teacher)] + "</span>" + "<br />";
             cell.className = 'course';
         }
 

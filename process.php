@@ -15,7 +15,7 @@ $root = str_replace('  ', '', $root);
 $root = str_replace('DSSVDSSV', 'DSSV', $root);
 
 $root = str_replace('x', ' ', $root); // fix chất lượng cao , clc có dấu x
-$root = str_replace('ã', 'xã', $root); // fix chất lượng cao , clc có dấu x
+$root = str_replace(' ã', 'xã', $root); // fix chất lượng cao , clc có dấu x
 
 $root = explode("DSSV", $root);
 
