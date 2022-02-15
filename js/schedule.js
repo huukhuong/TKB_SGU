@@ -1,3 +1,5 @@
+import DSGV from './dsgv';
+
 $.ajax({
     url: 'process.php',
     type: "GET",
