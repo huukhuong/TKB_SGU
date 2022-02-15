@@ -1,5 +1,3 @@
-import DSGV from './dsgv';
-
 $.ajax({
     url: 'process.php',
     type: "GET",
@@ -16,7 +14,7 @@ $.ajax({
 function drawSchedule(arr) {
     console.log("Dữ liệu trả về từ API:");
     console.log(arr);
-    
+
     let studentInfo = $('#studentInfo');
     studentInfo.html(
         '<span class="text-mutted">MSSV: </span>' +
@@ -29,6 +27,8 @@ function drawSchedule(arr) {
     for (let i = 0; i < arr.length - 1; i++) {
         arr[i].start = parseInt(arr[i].start);
         arr[i].total = parseInt(arr[i].total);
+        arr[i].teacher = 1001;
+
         switch (arr[i].day) {
             case 'Hai':
                 arr[i].day = 2;
@@ -86,26 +86,28 @@ function drawSchedule(arr) {
         }
         table_body.append(row);
     }
-    
+
     for (let i = 0; i < arr.length - 1; i++) {
         let start = arr[i].start * 1;
         let day = arr[i].day * 1;
         let total = arr[i].total * 1;
 
-        if(start == null) {
+        if (start == null) {
             continue;
         }
 
         let idCell = start + '_' + day;
         let cell = document.getElementById(idCell);
-        if(cell != null) {
-            if(cell.className == 'course') {
+        if (cell != null) {
+            if (cell.className == 'course') {
                 continue;
             }
             cell.rowSpan = arr[i].total;
             cell.innerHTML = "<span class='text-color'>" + arr[i].name + "</span>" + "<br />" +
-            "<i class='text-mutted'>Phòng: </i>" +
-            "<span class='text-color'>" + arr[i].room + "</span>" + "<br />";
+                "<i class='text-mutted'>Phòng: </i>" +
+                "<span class='text-color'>" + arr[i].room + "</span>" + "<br />" +
+                "<i class='text-mutted'>Giảng viên: </i>" +
+                "<span class='text-color'>" + arr[i].teacher + "</span>" + "<br />";
             cell.className = 'course';
         }
 
@@ -131,6 +133,6 @@ $('#btnSaveImage').click(function () {
     });
 });
 
-$('#btnBack').click(function() {
+$('#btnBack').click(function () {
     window.history.back();
 });

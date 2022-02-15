@@ -15,8 +15,8 @@
 <body>
     <div class="container py-5">
         <?php 
-        require('maintain.html');
-        die();
+        // require('maintain.html');
+        // die();
         ?>
         <div class="row justify-content-center">
             <div class="w-100 text-center"><img width="120px" src="./img/logo.png" alt="logo"></div>
@@ -36,13 +36,13 @@
         </div>
         <div class="text-center">
             <?php
-            require_once './connection.php';
+            // require_once './connection.php';
             
-            $sql = "SELECT * FROM `count`";
-            $query = mysqli_query($conn, $sql);
-            $row = mysqli_fetch_assoc($query);
+            // $sql = "SELECT * FROM `count`";
+            // $query = mysqli_query($conn, $sql);
+            // $row = mysqli_fetch_assoc($query);
             
-            echo 'Số lượt truy cập: ' . number_format($row['countNum'], 0, '.', '.');
+            // echo 'Số lượt truy cập: ' . number_format($row['countNum'], 0, '.', '.');
             ?>
         </div>
         <div class="py-5">

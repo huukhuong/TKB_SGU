@@ -1,4 +1,4 @@
-export default DSGV = {
+const DSGV = {
     10001: "Nguyễn Viết Ngoạn",
     10002: "Ngô Thị Hạnh",
     10003: "Nguyễn Việt Bắc",

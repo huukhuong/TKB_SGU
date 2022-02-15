@@ -47,6 +47,7 @@ $id = $_POST['id'];
 
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>
+    <script src="./js/dsgv.js"></script>
     <script src="./js/schedule.js"></script>
 </body>
 
