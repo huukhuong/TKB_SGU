@@ -10,8 +10,7 @@ if (isset($_GET['id'])) {
 }
 $html = file_get_html("http://thongtindaotao.sgu.edu.vn/Default.aspx?page=thoikhoabieu&sta=1&id=$id");
 $root = $html->find('.grid-roll2', 0);
-$root = $root->plaintext;
-
+$root = $root->plaintext;   
 $root = str_replace('  ', '', $root);
 $root = str_replace('DSSVDSSV', 'DSSV', $root);
 
@@ -34,6 +33,8 @@ $tietbd = [];
 $sotiet = [];
 //danh sách phòng
 $listroom = [];
+
+$danhsachgiaovien =[];
 
 function getTenmonHoc($str)
 {
@@ -300,6 +301,17 @@ function getdanhsachtiet($s)
     } */
 }
 
+function tachmagiaovien($s,$arrphong){
+    $danhsachgiaovien = [] ;
+   for($i = 0 ; $i < sizeof($arrphong) ; $i++){
+        $s = substr($s, 0, 5);
+        
+         $danhsachgiaovien[] = $s;
+   }
+   return $danhsachgiaovien;
+   
+}
+
 foreach ($root as $str) {
     global $vec;
     $name = getTenmonHoc($str);
@@ -307,14 +319,30 @@ foreach ($root as $str) {
     $cutDuThua = catBoDuThua($cutname);
     $vec = getlistDay($cutDuThua);
     getdanhsachtiet(getThutiet($cutDuThua));
+    $stringtiet  = getThutiet($cutDuThua);
     // BaSáuBa416238C.E402C.E4021154111541123456789012345123456789012345DSSV
     $listroom = getRoom($cutDuThua);
+   // echo $cutDuThua;
+    for($i = 0 ; $i < sizeof($vec) ; $i++){
+        $cutDuThua = str_replace($vec[$i], '', $cutDuThua);
+        $cutDuThua = str_replace($listroom[$i], '', $cutDuThua);
+       
+    }
+    /* for($j = 0 ; $j < sizeof($tietbd) ; $j++){
+        $cutDuThua = str_replace($tietkt[$j], '', $cutDuThua);
+        $cutDuThua = str_replace($tietbd[$j], '', $cutDuThua);
+    } */
+    $cutDuThua = str_replace($stringtiet, '', $cutDuThua);
+    /* echo $cutDuThua;
+    die(); */
+    $danhsachgiaovien = tachmagiaovien($cutDuThua,$listroom);
     for ($k = 0; $k < sizeof($vec); $k++) {
         $arr = [
             "name" => $name,
             "day" => $vec[$k],
             "start" => $tietbd[$k],
             "total" => $tietkt[$k],
+            "teacher" => $danhsachgiaovien[$k],
             "room" => $listroom[$k]
         ];
         $mh[] = $arr;
