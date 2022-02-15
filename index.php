@@ -14,6 +14,10 @@
 
 <body>
     <div class="container py-5">
+        <?php 
+        require('maintain.html');
+        die();
+        ?>
         <div class="row justify-content-center">
             <div class="w-100 text-center"><img width="120px" src="./img/logo.png" alt="logo"></div>
             <h3 class="text-center w-100 py-3">Xem thời khóa biểu theo tuần SGU</h3>
@@ -24,7 +28,7 @@
                     <input type="text" class="form-control" name="id" required>
                 </div>
                 <div style="text-align: center;">
-                    <input class="btn btn-primary" type="submit" value="Xem thời khóa biểu"
+                    <input class="btn btn-primary" type="submit" value="Xem thời khóa biểu" />
                     <br />
                     <p><a href="#baoloi">Liên hệ báo lỗi</a></p>
                 </div>
@@ -55,7 +59,6 @@
             <h6 class="text-center">Võ Hoàng Kiệt - K19 CNTT | <a target="_blank" href="https://www.facebook.com/thekids.1002/">Liên hệ</a></h6>
             <h6 class="text-center">Trần Hữu Khương - K19 CNTT | <a target="_blank" href="https://www.facebook.com/kayden.khuong/">Liên hệ</a></h6>
         </div>
-
     </div>
     </div>
 </body>
