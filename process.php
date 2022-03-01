@@ -1,4 +1,17 @@
+
 <?php
+
+/*
+Xin chào,
+Khi tôi bắt đầu thực hiện dự án này, chỉ có Chúa và tôi
+biết cách chạy nó.
+Giờ thì chỉ có Chúa mới biết!
+Vì thế, nếu bạn muốn cải tiến chương trình này nhưng
+gặp nhiều bug (khả năng cao là bạn sẽ gặp) thi hầu
+tăng giá trị của biến bên dưới lên để cảnh báo cho
+người tiếp theo,
+int total_hours_wasted here = 0;
+*/
 require_once './models/simple_html_dom.php';
 require_once './models/Course.php';
 
@@ -10,7 +23,7 @@ if (isset($_GET['id'])) {
 }
 $html = file_get_html("http://thongtindaotao.sgu.edu.vn/Default.aspx?page=thoikhoabieu&sta=1&id=$id");
 $root = $html->find('.grid-roll2', 0);
-$root = $root->plaintext;   
+$root = $root->plaintext;
 $root = str_replace('  ', '', $root);
 $root = str_replace('DSSVDSSV', 'DSSV', $root);
 
@@ -34,7 +47,7 @@ $sotiet = [];
 //danh sách phòng
 $listroom = [];
 
-$danhsachgiaovien =[];
+$danhsachgiaovien = [];
 
 function getTenmonHoc($str)
 {
@@ -78,8 +91,7 @@ function catBoDuThua($str)
         $str[0] = ' ';
         $str[1] = ' ';
         $str = trim($str, ' ');
-    }
-    elseif (is_numeric($str[0]) && !is_numeric($str[1])) {
+    } elseif (is_numeric($str[0]) && !is_numeric($str[1])) {
         $str[0] = ' ';
         $str = trim($str, ' ');
     }
@@ -196,7 +208,7 @@ function cutNumber($str)
 function  getThutiet($s)
 {
     // input = BaBa416238C.E402C.E4021154111541123456789012345123456789012345DSSV
-   
+
     $i = 0;
     for ($i = 0; $i < strlen($s); $i++) {
         if (is_numeric($s[$i])) {
@@ -213,37 +225,36 @@ function  getThutiet($s)
         }
     }
     $temp = substr($s, 0, $i);
-    
+
     return $temp;
     // out = 416238
 }
 
 function getdanhsachtiet($s)
-{ 
-    $indexof11 = strpos($s,"11");
-    
+{
+    $indexof11 = strpos($s, "11");
+
     $temp = "";
     global $tietbd;
     global $tietkt;
     $tietbd = [];
     $tietkt = [];
-    if($indexof11 > 0){
-      /*   echo "input ". $s;
+    if ($indexof11 > 0) {
+        /*   echo "input ". $s;
     echo "<br>";
     echo "index" . $indexof11;
     echo "<br>"; */
-        for($idx = 0 ; $idx < strlen($s);  $idx++){
-            if($idx != $indexof11 && $idx != strlen($s)){
+        for ($idx = 0; $idx < strlen($s); $idx++) {
+            if ($idx != $indexof11 && $idx != strlen($s)) {
                 $temp .= $s[$idx] . '_';
-            }
-            else{
+            } else {
                 $temp .= $s[$idx] . '';
             }
         }
         $s = $temp;
-      /*   echo "Temp =".$temp;
+        /*   echo "Temp =".$temp;
         echo "<br>"; */
-        $tiet = explode('_',$s);
+        $tiet = explode('_', $s);
         for ($l = 0; $l < sizeof($tiet) / 2; $l++) {
             $temp =  $tiet[$l];
             $tietbd[] = $temp;
@@ -252,9 +263,7 @@ function getdanhsachtiet($s)
             $temp =  $tiet[$l];
             $tietkt[] = $temp;
         }
-        
-    }
-    else{
+    } else {
         if (strlen($s) % 2 != 0) {
             $s = substr($s, 0, strlen($s) - 1);
         }
@@ -268,7 +277,7 @@ function getdanhsachtiet($s)
         }
     }
 
-   
+
     /*  if(strlen($s) == 2){
         $temp =  $s[0];
         $temp2 = $s[1];
@@ -301,15 +310,15 @@ function getdanhsachtiet($s)
     } */
 }
 
-function tachmagiaovien($s,$arrphong){
-    $danhsachgiaovien = [] ;
-   for($i = 0 ; $i < sizeof($arrphong) ; $i++){
+function tachmagiaovien($s, $arrphong)
+{
+    $danhsachgiaovien = [];
+    for ($i = 0; $i < sizeof($arrphong); $i++) {
         $s = substr($s, 0, 5);
-        
-         $danhsachgiaovien[] = $s;
-   }
-   return $danhsachgiaovien;
-   
+
+        $danhsachgiaovien[] = $s;
+    }
+    return $danhsachgiaovien;
 }
 
 foreach ($root as $str) {
@@ -322,11 +331,10 @@ foreach ($root as $str) {
     $stringtiet  = getThutiet($cutDuThua);
     // BaSáuBa416238C.E402C.E4021154111541123456789012345123456789012345DSSV
     $listroom = getRoom($cutDuThua);
-   // echo $cutDuThua;
-    for($i = 0 ; $i < sizeof($vec) ; $i++){
+    // echo $cutDuThua;
+    for ($i = 0; $i < sizeof($vec); $i++) {
         $cutDuThua = str_replace($vec[$i], '', $cutDuThua);
         $cutDuThua = str_replace($listroom[$i], '', $cutDuThua);
-       
     }
     /* for($j = 0 ; $j < sizeof($tietbd) ; $j++){
         $cutDuThua = str_replace($tietkt[$j], '', $cutDuThua);
@@ -335,17 +343,19 @@ foreach ($root as $str) {
     $cutDuThua = str_replace($stringtiet, '', $cutDuThua);
     /* echo $cutDuThua;
     die(); */
-    $danhsachgiaovien = tachmagiaovien($cutDuThua,$listroom);
+    $danhsachgiaovien = tachmagiaovien($cutDuThua, $listroom);
     for ($k = 0; $k < sizeof($vec); $k++) {
-        $arr = [
-            "name" => $name,
-            "day" => $vec[$k],
-            "start" => $tietbd[$k],
-            "total" => $tietkt[$k],
-            "teacher" => $danhsachgiaovien[$k],
-            "room" => $listroom[$k]
-        ];
-        $mh[] = $arr;
+        if ($name != "") {
+            $arr = [
+                "name" => $name,
+                "day" => $vec[$k],
+                "start" => $tietbd[$k],
+                "total" => $tietkt[$k],
+                "teacher" => $danhsachgiaovien[$k],
+                "room" => $listroom[$k]
+            ];
+            $mh[] = $arr;
+        }
     }
 }
 

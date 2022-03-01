@@ -1,66 +1,77 @@
-<br /><!DOCTYPE html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Xem thời khóa biểu SGU</title>
+    <title>Xem thời khoá biểu SGU</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
     <?php
     include './favicon.php';
+    require('./clearCache.php');
     ?>
+    <link rel="stylesheet" href="./css/index.css?time=<?= time() ?>">
 </head>
 
 <body>
-    <div class="container py-5">
-        <?php 
-        // require('maintain.html');
-        // die();
-        ?>
-        <div class="row justify-content-center">
-            <div class="w-100 text-center"><img width="120px" src="./img/logo.png" alt="logo"></div>
-            <h3 class="text-center w-100 py-3">Xem thời khóa biểu theo tuần SGU</h3>
-            <p class="text-center alert alert-danger mx-2">Website chỉ là giải pháp tạm thời, nhà trường sẽ sớm mở lại chức năng xem TKB theo tuần</p>
-            <form action="./schedule.php" method="post" class="col-md-6 col-12">
-                <div class="form-group">
-                    <label>Nhập mã sinh viên</label>
-                    <input type="text" class="form-control" name="id" required>
+
+
+    <div class="container" style="flex: 1;">
+        <div class="row justify-content-center w-100 py-5">
+            <div class="col-lg-6 col-12">
+                <div class="main-content">
+                    <div class="text-center">
+                        <img src="./img/logo.png" alt="logo" class="logo">
+                        <h2 class="title">Thời khoá biểu SGU</h2>
+                        <h6 class="info text-center">
+                            Dữ liệu được cập nhật từ trang web chính thức của nhà trường: <br>
+                            <a href="http://thongtindaotao.sgu.edu.vn/">thongtindaotao.sgu.edu.vn</a>
+                        </h6>
+                    </div>
+
+                    <div class="form">
+                        <form action="./schedule.php" method="post">
+                            <div class="shadow"></div>
+                            <div class="form-group">
+                                <i class="fas fa-search icon-form"></i>
+                                <input type="number" step="1" autocomplete="on" placeholder="Nhập mã sinh viên..." class="form-control input-form" name="id" required>
+                                <input class="btn btn-primary btn-form text-bold" type="submit" value="Tìm" />
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="text-center mt-4 mb-5 pb-5">
+                        Số lượt truy cập:
+                        <?php
+                        require_once './connection.php';
+
+                        $sql = "SELECT * FROM `count`";
+                        $query = mysqli_query($conn, $sql);
+                        $row = mysqli_fetch_assoc($query);
+
+                        echo number_format($row['countNum'], 0, '.', '.');
+                        ?>
+                    </div>
+
+
                 </div>
-                <div style="text-align: center;">
-                    <input class="btn btn-primary" type="submit" value="Xem thời khóa biểu" />
-                    <br />
-                    <p><a href="#baoloi">Liên hệ báo lỗi</a></p>
-                </div>
-            </form>
+            </div>
         </div>
-        <div class="text-center">
-            <?php
-            // require_once './connection.php';
-            
-            // $sql = "SELECT * FROM `count`";
-            // $query = mysqli_query($conn, $sql);
-            // $row = mysqli_fetch_assoc($query);
-            
-            // echo 'Số lượt truy cập: ' . number_format($row['countNum'], 0, '.', '.');
-            ?>
+
+        <div class="footer mt-5 p-2">
+            <p class="text-bold text-center m-0">Nhóm tác giả</p>
+            <div class="d-flex justify-content-center">
+                <a class="mx-2" href="https://www.facebook.com/thekids.1002/">
+                    <i class="fab fa-facebook"></i> <span class="text-bold">Võ Hoàng Kiệt</span>
+                </a>
+                <a class="mx-2" href="https://www.facebook.com/kayden.khuong/">
+                    <i class="fab fa-facebook"></i> <span class="text-bold">Trần Hữu Khương</span>
+                </a>
+            </div>
         </div>
-        <div class="py-5">
-            <h5 class="text-center alert alert-danger mt-2">
-                Vì trang web được viết gấp rút trong thời gian ngắn
-                nên không thể tránh khỏi các lỗi phát sinh <br />
-                Mong các bạn thông cảm
-            </h5>
-            <h5 class="text-center">
-                Nếu chức năng lưu ảnh bị lỗi vui lòng chụp màn hình thủ công
-            </h5>
-            <div class="alert alert-success mt-2">
-            <h5 id="baoloi" class="text-center">Liên hệ báo lỗi:</h5>
-            <h6 class="text-center">Võ Hoàng Kiệt - K19 CNTT | <a target="_blank" href="https://www.facebook.com/thekids.1002/">Liên hệ</a></h6>
-            <h6 class="text-center">Trần Hữu Khương - K19 CNTT | <a target="_blank" href="https://www.facebook.com/kayden.khuong/">Liên hệ</a></h6>
-        </div>
-    </div>
-    </div>
+
 </body>
 
 </html>

@@ -1,17 +1,40 @@
+:root {
+    --title-color: #ffffff;
+    --empty-color: #0289d1e3;
+    --basic-col-color: #f0f0f0;
+    --primary-2-color: #0665e0;
+    --course-2-color: #639eeb2c;
+    --primary-1-color: #369925;
+    --course-1-color: #3894281a;
+    --primary-color: #F75C1E;
+    --course-color: #f75b1e2f;
+    --primary-3-color: #32ABC6;
+    --course-3-color: #c8ece870;
+    --primary-4-color: #ec9f3f;
+    --course-4-color: #f7b76842;
+    --primary-5-color: #985bc7;
+    --course-5-color: #e1c2fb73;
+}
+
 * {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 table, tr, td {
-    border: 1px solid #333;
+    border: 1px solid #cfcfcf;
 }
 
 table {
     border-collapse: collapse;
+    padding-bottom: 16px;
 }
 
 td {
     width: 180px !important;
+}
+
+a {
+    text-decoration: none;
 }
 
 td div {
@@ -53,41 +76,115 @@ td div {
 
 #studentInfo {
     text-align: center;
-    padding: 4px;
-    min-width: 1268px;
+    padding: 14px;
+    min-width: 1200px;
+    font-size: 20px !important;
 }
 
 .thead_td {
     min-width: 180px;
-    max-width: 180px;
+    height: 45px !important;
     text-align: center;
     padding: 6px 0;
-    background-color: #2D8ECE;
-    color: #fff;
+    background-color: var(--empty-color);
+    color: var(--title-color);
     font-weight: bold;
+    text-transform: uppercase;
+}
+
+.col_basic {
+    background-color: var(--basic-col-color);
+    opacity: .6;
 }
 
 .stt {
-    width: 100px;
-     text-align: center;
+    max-width: 100px !important;
+    min-width: 100px !important;
+    text-align: center;
     padding: 6px 0;
-    background-color: #2D8ECE;
-    color: #fff;
+    background-color: var(--empty-color);
+    color: var(--title-color);
     font-weight: bold;
 }
 
 .course {
+    padding: 0 6px;
     vertical-align: middle;
-    background-color: #F5F5DC;
+    opacity: 1 !important;
+    position: relative;
+}
+
+.course-0 {
+    background-color: var(--course-color);
+    color: var(--primary-color) !important;
+}
+
+.course-1 {
+    background-color: var(--course-1-color);
+    color: var(--primary-1-color) !important;
+}
+
+.course-2 {
+    background-color: var(--course-2-color);
+    color: var(--primary-2-color) !important;
+}
+
+.course-3 {
+    background-color: var(--course-3-color);
+    color: var(--primary-3-color) !important;
+}
+
+.course-4 {
+    background-color: var(--course-4-color);
+    color: var(--primary-4-color) !important;
+}
+
+.course-5 {
+    background-color: var(--course-5-color);
+    color: var(--primary-5-color) !important;
+}
+
+.course::after {
+    content: "";
+    position: absolute;
+    left: -2px;
+    top: -1px;
+    bottom: 0;
+    width: 4px;
+    z-index: 10;
+    border-radius: 10px;
+}
+
+.course-0::after {
+    background-color: var(--primary-color) !important;
+}
+
+.course-1::after {
+    background-color: var(--primary-1-color) !important;
+}
+
+.course-2::after {
+    background-color: var(--primary-2-color) !important;
+}
+
+.course-3::after {
+    background-color: var(--primary-3-color) !important;
+}
+
+.course-4::after {
+    background-color: var(--primary-4-color) !important;
+}
+
+.course-5::after {
+    background-color: var(--primary-5-color) !important;
 }
 
 .text-color {
-    color: #31755E;
     font-weight: bold;
 }
 
 .text-mutted {
-    color: #80808C;
+    color: #7a7a7a;
     font-weight: bold;
 }
 
@@ -99,6 +196,14 @@ td div {
     display: flex;
     justify-content: center;
     flex-direction: column;
+    /* border: 3px solid #7a7a7a; */
+    /* border-radius: 8px; */
+    overflow: hidden;
+    min-width: 1200px;
+    
+    -webkit-box-shadow: 0px 0px 16px -4px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0px 0px 16px -4px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 0px 16px -4px rgba(0, 0, 0, 0.2);
 }
 
 #loading {
@@ -117,4 +222,9 @@ td div {
 #loading img {
     width: 120px;
     height: auto;
+}
+
+.info-text-color {
+    color: var(--primary-color);
+    font-weight: bold;
 }

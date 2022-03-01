@@ -11,18 +11,22 @@ $.ajax({
     }
 });
 
-function drawSchedule(arr) {
+const randomIntFromInterval = (min, max) => {
+    return Math.floor(Math.random() * (max - min + 1) + min)
+}
+
+const drawSchedule = (arr) => {
     console.log("Dữ liệu trả về từ API:");
     console.log(arr);
 
     let studentInfo = $('#studentInfo');
     studentInfo.html(
         '<span class="text-mutted">MSSV: </span>' +
-        '<span class="text-color">' + arr[arr.length - 1].name + '</span>' +
+        '<span class="info-text-color">' + arr[arr.length - 1].name + '</span>' +
         '<span class="text-mutted space_left">Họ tên: </span>' +
-        '<span class="text-color">' + arr[arr.length - 1].day + '</span>' +
+        '<span class="info-text-color">' + arr[arr.length - 1].day + '</span>' +
         '<span class="text-mutted space_left">Lớp: </span>' +
-        '<span class="text-color">' + arr[arr.length - 1].start + '</span>'
+        '<span class="info-text-color">' + arr[arr.length - 1].start + '</span>'
     );
     for (let i = 0; i < arr.length - 1; i++) {
         arr[i].start = parseInt(arr[i].start);
@@ -73,13 +77,15 @@ function drawSchedule(arr) {
     // vẽ 12 hàng ngang
     for (let i = 1; i <= 12; i++) {
         let row = document.createElement('tr');
-        for (let j = 1; j <= 7; j++) {
+        for (let j = 1; j <= 8; j++) {
             let col = document.createElement('td');
-            if (j == 1) {
+            const className = ' col_basic';
+            if (j == 1 || j == 8) {
                 col.className = 'stt';
                 col.innerHTML = '<div>' + 'Tiết ' + i + '</div>';
             } else {
                 col.id = i + '_' + j;
+                col.className = className;
             }
             row.append(col);
         }
@@ -101,13 +107,45 @@ function drawSchedule(arr) {
             if (cell.className == 'course') {
                 continue;
             }
+            let tengiaovien = "";
+
             cell.rowSpan = arr[i].total;
-            cell.innerHTML = "<span class='text-color'>" + arr[i].name + "</span>" + "<br />" +
-                "<i class='text-mutted'>Phòng: </i>" +
-                "<span class='text-color'>" + arr[i].room + "</span>" + "<br />" +
-                "<i class='text-mutted'>Giảng viên: </i>" +
-                "<span class='text-color'>" + DSGV[parseInt(arr[i].teacher)] + "</span>" + "<br />";
-            cell.className = 'course';
+            if (typeof (DSGV[parseInt(arr[i].teacher)]) != "undefined") {
+                tengiaovien = DSGV[parseInt(arr[i].teacher)];
+                cell.innerHTML = "<span class='text-color'>" + arr[i].name + "</span>" + "<br />" +
+                    "<i class='text-mutted'>Phòng: </i>" +
+                    "<span class='text-color'>" + arr[i].room + "</span>" + "<br />" +
+                    "<i class='text-mutted'>Giảng viên: </i>" +
+                    "<span class='text-color'>" + tengiaovien + "</span>" + "<br />";
+            }
+            else {
+                cell.innerHTML = "<span class='text-color'>" + arr[i].name + "</span>" + "<br />" +
+                    "<i class='text-mutted'>Phòng: </i>" +
+                    "<span class='text-color'>" + arr[i].room + "</span>" + "<br />" +
+                    "<i class='text-mutted'></span>" + "<br />";
+            }
+            let courseType = 0;
+            switch (arr[i].day) {
+                case 2:
+                    courseType = 0;
+                    break;
+                case 3:
+                    courseType = 1;
+                    break;
+                case 4:
+                    courseType = 2;
+                    break;
+                case 5:
+                    courseType = 3;
+                    break;
+                case 6:
+                    courseType = 4;
+                    break;
+                case 7:
+                    courseType = 5;
+                    break;
+            }
+            cell.className = 'course ' + cell.className + ' course-' + courseType;
         }
 
         for (let j = 0; j < total - 1; j++) {
@@ -118,9 +156,21 @@ function drawSchedule(arr) {
             }
         }
     }
+    // thêm hàng thứ vào cuối
+    const lastRow = document.createElement('tr');
+    lastRow.innerHTML =
+        '<td class="stt bg-white"></td>' +
+        '<td class="thead_td">Thứ Hai</td>' +
+        '<td class="thead_td">Thứ Ba</td>' +
+        '<td class="thead_td">Thứ Tư</td>' +
+        '<td class="thead_td">Thứ Năm</td>' +
+        '<td class="thead_td">Thứ Sáu</td>' +
+        '<td class="thead_td">Thứ Bảy</td>' +
+        '<td class="stt bg-white"></td>';
+    table_body.append(lastRow);
 }
 
-$('#btnSaveImage').click(function () {
+$('#btnSaveImage').click(() => {
     html2canvas($("#capture")[0]).then(canvas => {
         document.body.appendChild(canvas)
         $('canvas').css('display', 'none');
@@ -132,6 +182,6 @@ $('#btnSaveImage').click(function () {
     });
 });
 
-$('#btnBack').click(function () {
+$('#btnBack').click(() => {
     window.history.back();
 });
