@@ -1,4 +1,4 @@
 # TKB_SGU
-Xin chào,
-Khi tôi bắt đầu thực hiện dự án này, chỉ có Chúa và tôi biết cách chạy nó.
-Giờ thì chỉ có Chúa mới biết!
+### Hello,
+#### When I started working on this project, only God and I knew how to run it.
+#### Now, only God knows it!
