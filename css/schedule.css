@@ -1,0 +1,241 @@
+:root {
+    --title-color: #333;
+    --empty-color: #F2F2F2;
+    --basic-col-color: #fff;
+    --primary-2-color: #0665e0;
+    --course-2-color: #639eeb2c;
+    --primary-1-color: #369925;
+    --course-1-color: #3894281a;
+    --primary-color: #F75C1E;
+    --course-color: #f75b1e2f;
+    --primary-3-color: #32ABC6;
+    --course-3-color: #c8ece870;
+    --primary-4-color: #ec9f3f;
+    --course-4-color: #f7b76842;
+    --primary-5-color: #985bc7;
+    --course-5-color: #e1c2fb73;
+}
+
+* {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: .8rem !important;
+}
+
+table, tr, td {
+    border: 1px solid #cfcfcf;
+}
+
+table {
+    border-collapse: collapse;
+    padding-bottom: 16px;
+}
+
+td {
+    width: 135px !important;
+}
+
+a {
+    text-decoration: none;
+}
+
+td div {
+    min-height: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn {
+    border: none;
+    color: white;
+    font-weight: bold;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    font-size: .8rem;
+    line-height: 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all .2s linear;
+}
+
+#btnBack {
+    background-color: rgb(0, 167, 50);
+}
+
+#btnBack:hover {
+    background-color: rgb(0, 184, 55);
+}
+
+#btnSaveImage {
+    background-color: rgb(204, 42, 42);
+}
+
+#btnSaveImage:hover {
+    background-color: rgb(235, 69, 69);
+}
+
+#studentInfo {
+    text-align: center;
+    padding: 14px;
+    min-width: 1000px;
+    max-width: 1000px;
+    font-size: .8rem !important;
+}
+
+.thead_td {
+    min-width: 135px;
+    height: 32px !important;
+    text-align: center;
+    padding: 6px 0;
+    background-color: var(--empty-color);
+    color: var(--title-color);
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.col_basic {
+    background-color: var(--basic-col-color);
+    opacity: .6;
+}
+
+.stt {
+    max-width: 80px !important;
+    min-width: 80px !important;
+    text-align: center;
+    padding: 6px 0;
+    background-color: var(--empty-color);
+    color: var(--title-color);
+    font-weight: bold;
+}
+
+.course {
+    padding: 0 6px;
+    vertical-align: middle;
+    opacity: 1 !important;
+    position: relative;
+    font-size: .8rem;
+}
+
+.course-0 {
+    background-color: var(--course-color);
+    color: var(--primary-color) !important;
+}
+
+.course-1 {
+    background-color: var(--course-1-color);
+    color: var(--primary-1-color) !important;
+}
+
+.course-2 {
+    background-color: var(--course-2-color);
+    color: var(--primary-2-color) !important;
+}
+
+.course-3 {
+    background-color: var(--course-3-color);
+    color: var(--primary-3-color) !important;
+}
+
+.course-4 {
+    background-color: var(--course-4-color);
+    color: var(--primary-4-color) !important;
+}
+
+.course-5 {
+    background-color: var(--course-5-color);
+    color: var(--primary-5-color) !important;
+}
+
+.course::after {
+    content: "";
+    position: absolute;
+    left: -2px;
+    top: -1px;
+    bottom: 0;
+    width: 4px;
+    z-index: 10;
+    border-radius: 10px;
+}
+
+.course-0::after {
+    background-color: var(--primary-color) !important;
+}
+
+.course-1::after {
+    background-color: var(--primary-1-color) !important;
+}
+
+.course-2::after {
+    background-color: var(--primary-2-color) !important;
+}
+
+.course-3::after {
+    background-color: var(--primary-3-color) !important;
+}
+
+.course-4::after {
+    background-color: var(--primary-4-color) !important;
+}
+
+.course-5::after {
+    background-color: var(--primary-5-color) !important;
+}
+
+.text-color {
+    font-weight: bold;
+}
+
+.text-mutted {
+    color: #7a7a7a;
+    font-weight: bold;
+}
+
+.space_left {
+    margin-left: 10px;
+}
+
+.main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#capture {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    /* border: 3px solid #7a7a7a; */
+    /* border-radius: 8px; */
+    overflow: hidden;
+    min-width: 1000px;
+    max-width: 1000px;
+    
+    /*-webkit-box-shadow: 0px 0px 16px -4px rgba(0, 0, 0, 0.2);*/
+    /*-moz-box-shadow: 0px 0px 16px -4px rgba(0, 0, 0, 0.2);*/
+    /*box-shadow: 0px 0px 16px -4px rgba(0, 0, 0, 0.2);*/
+}
+
+#loading {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ffffff52;
+    position: fixed;
+    z-index: 100;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
+#loading img {
+    width: 120px;
+    height: auto;
+}
+
+.info-text-color {
+    color: var(--primary-color);
+    font-weight: bold;
+}
