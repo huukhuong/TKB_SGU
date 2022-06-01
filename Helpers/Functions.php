@@ -40,7 +40,7 @@ function plaintextRoomsToArray($str)
 
     $n = count($address);
     for ($i = 0; $i < $n; $i++) {
-        $result[] = $address[$i] . $room[$i];
+        $result[] = $address[$i] . $room[$i + 1];
     }
 
     return array_values($result);
