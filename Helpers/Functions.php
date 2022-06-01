@@ -27,9 +27,23 @@ function plaintextRoomsToArray($str)
 {
     // input: C.S_A02C.S_A02
     // output: [C.S_A02, C.S_A02]
-    $pieces = preg_split('/(?=[A-Z]+\.)/', $str);
-    unset($pieces[0]);
-    return array_values($pieces);
+    $result = [];
+    // input: C.A0021.B104
+    // output: [C., 1.]
+    preg_match_all('/.\./', $str, $address);
+    $address = $address[0];
+
+    // input: C.A0021.B104
+    // output: [A002, B104]
+    $room = preg_split('/.\./', $str);
+    unset($room[0]);
+
+    $n = count($address);
+    for ($i = 0; $i < $n; $i++) {
+        $result[] = $address[$i] . $room[$i];
+    }
+
+    return array_values($result);
 }
 
 function plaintextTeachersToArray($str)
