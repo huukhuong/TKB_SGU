@@ -117,6 +117,21 @@
                 ?>
             </tbody>
         </table>
+
+        <div class="text-center mt-4 mb-5 pb-5">
+            Số lượt truy cập:
+            <?php
+            require_once './Helpers/connection.php';
+
+            $sql = "SELECT * FROM `count` WHERE `pageName`='quaMon'";
+            $query = mysqli_query($conn, $sql);
+            $row  = mysqli_fetch_assoc($query);
+
+            echo number_format($row['countNum'], 0, '.', '.');
+            $sql = "UPDATE `count` SET `countNum`=`countNum`+1 WHERE `pageName`='quaMon'";
+            $query = mysqli_query($conn, $sql);
+            ?>
+        </div>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
