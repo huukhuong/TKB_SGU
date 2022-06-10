@@ -43,12 +43,11 @@
                     <p class="mt-4 alert alert-danger text-center">
                         <b>Thông báo:</b>
                         <br>
-                        Website sẽ sớm được chuyển sang tên miền mới
-                        dự kiến vào hết đợt dkmh cho học kì hè năm 2022
+                        Chúng tớ vừa update thêm chức năng mới
                         <br>
-                        <a href="https://huukhuongit.com/tkb">huukhuongit.com/tkb</a>
+                        <a href="https://huukhuongit.com/tkb/quaMon.php">Tính điểm qua môn</a>
                         <br>
-                        Mong các bạn chia sẻ cho bạn bè thông tin này
+                        Mong sẽ hỗ trợ tốt cho các bạn trong mùa thi này
                     </p>
 
                     <div class="text-center mt-4 mb-5 pb-5">
