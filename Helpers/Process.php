@@ -68,6 +68,7 @@ for ($i = 0; $i < $courseCount; $i++) {
             "name" => $name,
             "day" => $listDays[$k],
             "start" => $listStarts[$k],
+            "end" => $listStarts[$k] + $listTotals[$k] - 1,
             "total" => $listTotals[$k],
             "room" => $listRooms[$k],
             "teacher" => $listTeachers[$k]
