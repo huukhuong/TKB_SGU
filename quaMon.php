@@ -1,10 +1,10 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tính điểm qua môn SGU</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
@@ -38,7 +38,7 @@
     }
 
     .input_M {
-        width: 80px;
+        width: 70px;
         margin: auto;
         text-align: center;
     }
@@ -60,21 +60,21 @@
     }
 
     .width-50px {
-        max-width: 50px !important;
+        min-width: 80px !important;
+        max-width: 80px !important;
     }
 </style>
 
 <body>
-    <div class="table-responsive container-fluid">
+    <div class="container-fluid">
         <h2 class="text-center py-4">Công cụ tính điểm qua môn</h2>
         <table class="table table-hover">
             <thead>
                 <tr>
-                    <th class="text-center" scope="col">#</th>
-                    <th scope="col" style="min-width: 200px;">Môn</th>
+                    <th class="" scope="col">Môn</th>
                     <th class="text-center width-50px" scope="col">Điểm QT</th>
                     <th class="text-center width-50px" scope="col">Hệ số QT</th>
-                    <th class="text-center width-50px" scope="col">Hệ số Thi</th>
+                    <th class="text-center width-50px" scope="col">HSố Thi</th>
                     <th class="text-center width-50px" scope="col">Đạt D</th>
                     <th class="text-center width-50px" scope="col">Đạt C</th>
                     <th class="text-center width-50px" scope="col">Đạt B</th>
@@ -86,8 +86,7 @@
                 for ($i = 1; $i <= 10; $i++) {
                 ?>
                     <tr>
-                        <th class="text-center" scope="row"><?= $i ?></th>
-                        <td>
+                        <td class="text-center">
                             <input id="monHoc_<?= $i ?>" autocomplete="off" class="input input_L" />
                         </td>
                         <td class="text-center width-50px">
@@ -128,8 +127,9 @@
             $row  = mysqli_fetch_assoc($query);
 
             echo number_format($row['countNum'], 0, '.', '.');
+            if(!isset($_GET['admin'])){
             $sql = "UPDATE `count` SET `countNum`=`countNum`+1 WHERE `pageName`='quaMon'";
-            $query = mysqli_query($conn, $sql);
+            $query = mysqli_query($conn, $sql);}
             ?>
         </div>
     </div>

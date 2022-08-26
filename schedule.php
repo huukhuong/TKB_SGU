@@ -8,6 +8,20 @@ if (!isset($_POST['id'])) {
 }
 $id = $_POST['id'];
 require('./Helpers/clearCache.php');
+
+require_once('./Helpers/connection.php');
+
+$sql = "SELECT `id` FROM `blocks`";
+$query = mysqli_query($conn, $sql);
+$blocks = array();
+while ($row = mysqli_fetch_assoc($query)) {
+	$blocks[] = $row['id'];
+}
+foreach ($blocks as $item) {
+  	if ($item == $id) {
+    	echo "<script>alert('Không thể xem TKB của tài khoản này!'); history.back();</script>";
+    }
+}
 ?>
 <!DOCTYPE html>
 <html>

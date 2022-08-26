@@ -11,6 +11,14 @@
     <?php
     include './Helpers/favicon.php';
     require './Helpers/clearCache.php';
+    require_once './Helpers/connection.php';
+    $sql = "SELECT * FROM `notifications`";
+    $query = mysqli_query($conn, $sql);
+    $noti = mysqli_fetch_assoc($query);
+    if ($noti['maintain'] == 1) {
+		include './maintain.html';
+      	die();
+    }
     ?>
     <link rel="stylesheet" href="./css/index.css?time=<?= time() ?>">
 </head>
@@ -28,32 +36,37 @@
                             <a href="http://thongtindaotao.sgu.edu.vn/">thongtindaotao.sgu.edu.vn</a>
                         </h6>
                     </div>
-
-                    <div class="form">
+                    <?php
+                          if ($noti['showWarning'] == 1) {
+                          ?>
+                              <p class="alert alert-warning mt-2"><?=$noti['warning']?></p>
+                          <?php
+                          }
+                          if ($noti['showDanger'] == 1) {
+                          ?>
+                              <p class="alert alert-danger mt-2"><?=$noti['danger']?></p>
+                          <?php
+                          }
+                          if ($noti['showSuccess'] == 1) {
+                          ?>
+                              <p class="alert alert-success mt-2"><?=$noti['success']?></p>
+                          <?php
+                          }
+                    ?>
+                    <div class="form mt-0">
                         <form action="./schedule.php" method="post">
                             <div class="shadow"></div>
                             <div class="form-group">
                                 <i class="fas fa-search icon-form"></i>
                                 <input type="number" step="1" autocomplete="on" placeholder="Nhập mã sinh viên..." class="form-control input-form" name="id" required>
-                                <input class="btn btn-primary btn-form text-bold" type="submit" value="Tìm" />
+                               <input class="btn btn-primary btn-form text-bold" type="submit" value="Tìm" />
                             </div>
                         </form>
                     </div>
 
-                    <p class="mt-4 alert alert-danger text-center">
-                        <b>Thông báo:</b>
-                        <br>
-                        Chúng tớ vừa update thêm chức năng mới
-                        <br>
-                        <a href="https://huukhuongit.com/tkb/quaMon.php">Tính điểm qua môn</a>
-                        <br>
-                        Mong sẽ hỗ trợ tốt cho các bạn trong mùa thi này
-                    </p>
-
-                    <div class="text-center mt-4 mb-5 pb-5">
+                    <div class="text-center mt-4 mb-5">
                         Số lượt truy cập:
                         <?php
-                        require_once './Helpers/connection.php';
 
                         $sql = "SELECT * FROM `count` WHERE `pageName`='schedule'";
                         $query = mysqli_query($conn, $sql);
@@ -65,12 +78,12 @@
 
                     <p class="text-center mt-2">
                         Ủng hộ bọn mình bằng cách <br />
-                        <a href="https://123host.vn/hosting-mien-phi.html?utm_source=INV&utm_medium=FHREF&utm_campaign=123963 ">đăng ký hosting miễn phí</a> được tài trợ bởi <b>123HOST</b>
+                        <a href="https://123host.vn/hosting-mien-phi.html?utm_source=INV&utm_medium=FHREF&utm_campaign=132151">đăng ký hosting miễn phí</a> được tài trợ bởi <b>123HOST</b>
                     </p>
 
-                    <p class="text-center">
-                        <a href="https://github.com/huukhuong/TKB_SGU">Mã nguồn trang web</a>
-                    </p>
+                  <p class="mt-4 mb-5 alert alert-success text-center">
+                  	<?=$noti['extend']?>      
+                  </p>
                 </div>
             </div>
         </div>

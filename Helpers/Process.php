@@ -68,7 +68,7 @@ for ($i = 0; $i < $courseCount; $i++) {
             "name" => $name,
             "day" => $listDays[$k],
             "start" => $listStarts[$k],
-            "end" => $listStarts[$k] + $listTotals[$k] - 1,
+          	"end" => $listStarts[$k] + $listTotals[$k] - 1,
             "total" => $listTotals[$k],
             "room" => $listRooms[$k],
             "teacher" => $listTeachers[$k]
@@ -96,4 +96,6 @@ $listResult[] = $course;
 echo json_encode($listResult, JSON_UNESCAPED_UNICODE);
 
 // write log
-require_once "./writeLog.php";
+if (!isset($_GET['admin'])) {
+	require_once "./writeLog.php";
+}

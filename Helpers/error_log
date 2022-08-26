@@ -1,0 +1,64 @@
+[24-May-2022 02:50:09 UTC] PHP Fatal error:  Uncaught Error: Call to a member function find() on null in /home/byjwhotg/public_html/tkb/Helpers/Process.php:16
+Stack trace:
+#0 {main}
+  thrown in /home/byjwhotg/public_html/tkb/Helpers/Process.php on line 16
+[24-May-2022 02:50:15 UTC] PHP Fatal error:  Uncaught Error: Call to a member function find() on null in /home/byjwhotg/public_html/tkb/Helpers/Process.php:16
+Stack trace:
+#0 {main}
+  thrown in /home/byjwhotg/public_html/tkb/Helpers/Process.php on line 16
+[24-May-2022 02:50:19 UTC] PHP Fatal error:  Uncaught Error: Call to a member function find() on null in /home/byjwhotg/public_html/tkb/Helpers/Process.php:16
+Stack trace:
+#0 {main}
+  thrown in /home/byjwhotg/public_html/tkb/Helpers/Process.php on line 16
+[24-May-2022 02:50:23 UTC] PHP Fatal error:  Uncaught Error: Call to a member function find() on null in /home/byjwhotg/public_html/tkb/Helpers/Process.php:16
+Stack trace:
+#0 {main}
+  thrown in /home/byjwhotg/public_html/tkb/Helpers/Process.php on line 16
+[27-May-2022 02:41:16 UTC] PHP Fatal error:  Uncaught Error: Call to a member function find() on null in /home/byjwhotg/public_html/tkb/Helpers/Process.php:16
+Stack trace:
+#0 {main}
+  thrown in /home/byjwhotg/public_html/tkb/Helpers/Process.php on line 16
+[28-May-2022 13:52:54 UTC] PHP Fatal error:  Uncaught Error: Call to a member function find() on null in /home/byjwhotg/public_html/tkb/Helpers/Process.php:16
+Stack trace:
+#0 {main}
+  thrown in /home/byjwhotg/public_html/tkb/Helpers/Process.php on line 16
+[28-May-2022 13:54:59 UTC] PHP Fatal error:  Uncaught Error: Call to a member function find() on null in /home/byjwhotg/public_html/tkb/Helpers/Process.php:16
+Stack trace:
+#0 {main}
+  thrown in /home/byjwhotg/public_html/tkb/Helpers/Process.php on line 16
+[30-May-2022 09:18:18 UTC] PHP Fatal error:  Uncaught Error: Call to a member function find() on null in /home/byjwhotg/public_html/tkb/Helpers/Process.php:16
+Stack trace:
+#0 {main}
+  thrown in /home/byjwhotg/public_html/tkb/Helpers/Process.php on line 16
+[30-May-2022 12:00:27 UTC] PHP Fatal error:  Uncaught Error: Call to a member function find() on null in /home/byjwhotg/public_html/tkb/Helpers/Process.php:16
+Stack trace:
+#0 {main}
+  thrown in /home/byjwhotg/public_html/tkb/Helpers/Process.php on line 16
+[01-Jun-2022 05:55:55 UTC] PHP Fatal error:  Uncaught Error: Call to a member function find() on null in /home/byjwhotg/public_html/tkb/Helpers/Process.php:16
+Stack trace:
+#0 {main}
+  thrown in /home/byjwhotg/public_html/tkb/Helpers/Process.php on line 16
+[01-Jun-2022 05:58:10 UTC] PHP Fatal error:  Uncaught Error: Call to a member function find() on null in /home/byjwhotg/public_html/tkb/Helpers/Process.php:16
+Stack trace:
+#0 {main}
+  thrown in /home/byjwhotg/public_html/tkb/Helpers/Process.php on line 16
+[01-Jun-2022 06:01:08 UTC] PHP Fatal error:  Uncaught Error: Call to a member function find() on null in /home/byjwhotg/public_html/tkb/Helpers/Process.php:16
+Stack trace:
+#0 {main}
+  thrown in /home/byjwhotg/public_html/tkb/Helpers/Process.php on line 16
+[02-Jun-2022 02:57:46 UTC] PHP Fatal error:  Uncaught Error: Call to a member function find() on null in /home/byjwhotg/public_html/tkb/Helpers/Process.php:16
+Stack trace:
+#0 {main}
+  thrown in /home/byjwhotg/public_html/tkb/Helpers/Process.php on line 16
+[02-Jun-2022 02:57:50 UTC] PHP Fatal error:  Uncaught Error: Call to a member function find() on null in /home/byjwhotg/public_html/tkb/Helpers/Process.php:16
+Stack trace:
+#0 {main}
+  thrown in /home/byjwhotg/public_html/tkb/Helpers/Process.php on line 16
+[02-Jun-2022 02:58:27 UTC] PHP Fatal error:  Uncaught Error: Call to a member function find() on null in /home/byjwhotg/public_html/tkb/Helpers/Process.php:16
+Stack trace:
+#0 {main}
+  thrown in /home/byjwhotg/public_html/tkb/Helpers/Process.php on line 16
+[16-Jun-2022 08:34:28 UTC] PHP Fatal error:  Uncaught Error: Call to a member function find() on null in /home/byjwhotg/public_html/tkb/Helpers/Process.php:16
+Stack trace:
+#0 {main}
+  thrown in /home/byjwhotg/public_html/tkb/Helpers/Process.php on line 16

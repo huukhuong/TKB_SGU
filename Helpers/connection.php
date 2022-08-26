@@ -1,10 +1,9 @@
 <?php
-    error_reporting(E_ERROR | E_PARSE);
 
     define('HOST', 'localhost');
-    define('USERNAME', 'byjwhotg_huukhuong');
+    define('USERNAME', 'lhkkarrn_root');
     define('PASSWORD', '25102001k');
-    define('DATABASE', 'byjwhotg_tkb');
+    define('DATABASE', 'lhkkarrn_tkb');
 
     $conn = mysqli_connect(HOST, USERNAME, PASSWORD, DATABASE);
     mysqli_set_charset($conn, "utf8");
