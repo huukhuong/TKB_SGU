@@ -8,11 +8,11 @@
     </li>
 
     <li class="nav-item d-none d-sm-inline-block">
-      <a href="/admin" class="nav-link {{$page == 'list-student' ? 'active': ''}}">Thống kê truy cập</a>
+      <a href="/admin" class="nav-link {{$page == 'students' ? 'active': ''}}">Thống kê truy cập</a>
     </li>
 
     <li class="nav-item d-none d-sm-inline-block">
-      <a href="/admin" class="nav-link {{$page == 'list-block' ? 'active': ''}}">Quản lý block</a>
+      <a href="/admin" class="nav-link {{$page == 'blocks' ? 'active': ''}}">Quản lý block</a>
     </li>
   </ul>
 

@@ -17,7 +17,7 @@
         </li>
 
         <li class="nav-item">
-          <a href="#" class="nav-link {{$page == 'list-student' ? 'active': ''}}">
+          <a href="/admin/students" class="nav-link {{$page == 'students' ? 'active': ''}}">
             <i class="nav-icon fas fa-user-clock"></i>
             <p>
               Thống kê truy cập
@@ -26,10 +26,19 @@
         </li>
 
         <li class="nav-item">
-          <a href="#" class="nav-link {{$page == 'list-block' ? 'active': ''}}">
+          <a href="/admin/blocks" class="nav-link {{$page == 'blocks' ? 'active': ''}}">
             <i class="nav-icon fas fa-user-lock"></i>
             <p>
               Quản lý block
+            </p>
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a href="/admin/lectures" class="nav-link {{$page == 'lectures' ? 'active': ''}}">
+            <i class="nav-icon fas fa-users"></i>
+            <p>
+              Danh sách giảng viên
             </p>
           </a>
         </li>

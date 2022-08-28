@@ -6,6 +6,7 @@ use App\Models\Block;
 use App\Models\Config;
 use App\Models\Lecture;
 use App\Models\PassStudent;
+use App\Models\Student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -62,5 +63,14 @@ class AdminController extends Controller
     {
         Auth::logout();
         return redirect('admin');
+    }
+
+    public function student()
+    {
+        $students = Student::orderBy('visited_at', 'DESC')->paginate(200);
+        return view('admin/student', [
+            'page' => 'students',
+            'students' => $students
+        ]);
     }
 }
