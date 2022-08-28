@@ -14,10 +14,11 @@
 @endsection
 
 @section('content')
+    {{ $students->links('admin/layouts/pagination') }}
     <div class="col-12">
         <div class="card card-primary">
-            <div class="card-body table-responsive p-0" style="max-height: 60vh; border-bottom: 1px solid #ccc">
-                <table class="table table-head-fixed text-nowrap table-bordered table-hover dataTable dtr-inline">
+            <div class="card-body table-responsive p-0" style="border-bottom: 1px solid #ccc">
+                <table class="table table-head-fixed text-nowrap bg-white">
                     <thead>
                         <tr>
                             <th>MSSV</th>
@@ -46,11 +47,7 @@
                     </tbody>
                 </table>
             </div>
-            <!-- /.card-body -->
-            <div class="row">
-                {{ $students->links('admin/layouts/pagination') }}
-            </div>
         </div>
-        <!-- /.card -->
     </div>
+    {{ $students->links('admin/layouts/pagination') }}
 @endsection

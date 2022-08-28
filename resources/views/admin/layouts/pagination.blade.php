@@ -1,12 +1,13 @@
-<div class="p-2">
-    <div class="pl-4 pt-2">
-        Đang hiển thị {{ $paginator->currentPage() }}
-        trên {{ $paginator->lastPage() }} trang
-        của {{ number_format($paginator->total()) }} records
-    </div>
-</div>
 <div class="col-12">
-    <div class="" style="overflow: auto">
+    <div class="card card-primary">
+        <div class="p-2">
+            <div class="pl-4 pt-2">
+                Đang hiển thị {{ $paginator->currentPage() }}
+                trên {{ $paginator->lastPage() }} trang
+                của {{ number_format($paginator->total()) }} records
+            </div>
+        </div>
+
         @if ($paginator->lastPage() > 1)
             <ul class="pagination px-4" style="flex-wrap: wrap">
                 <li class="paginate_button page-item previous {{ $paginator->currentPage() == 1 ? ' disabled' : '' }}">
@@ -24,5 +25,4 @@
             </ul>
         @endif
     </div>
-</div>
 </div>
