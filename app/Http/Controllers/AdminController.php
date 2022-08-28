@@ -32,10 +32,9 @@ class AdminController extends Controller
 
     public function saveMaintainConfig(Request $request)
     {
-        DB::table('configs')
-            ->where('key', 'maintain')
+        Config::where('key', 'maintain')
             ->update([
-                'value' => $request->input('maintain') == 'on',
+                'value' => $request->input('maintain'),
                 'content' => $request->input('maintain-content')
             ]);
         return redirect('admin');
