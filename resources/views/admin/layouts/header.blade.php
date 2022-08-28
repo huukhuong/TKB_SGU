@@ -8,7 +8,7 @@
     </li>
 
     <li class="nav-item d-none d-sm-inline-block">
-      <a href="/admin" class="nav-link {{$page == 'list-student' ? 'active': ''}}">Danh sách sinh viên</a>
+      <a href="/admin" class="nav-link {{$page == 'list-student' ? 'active': ''}}">Thống kê truy cập</a>
     </li>
 
     <li class="nav-item d-none d-sm-inline-block">
@@ -18,7 +18,7 @@
 
   <ul class="navbar-nav ml-auto">
     <li class="nav-item d-none d-sm-inline-block">
-      <a href="/admin/logout" class="nav-link"><i class="fas fa-sign-out-alt"></i> Logout</a>
+      <a href="/admin/logout" class="nav-link"><i class="fas fa-sign-out-alt"></i> Đăng xuất</a>
     </li>
   </ul>
 </nav>

@@ -12,5 +12,9 @@ Route::post('login', [AdminController::class, 'postLogin']);
 
 Route::group(['prefix' => 'admin',  'middleware' => 'auth'], function () {
     Route::get('/', [AdminController::class, 'index']);
+    Route::post('/', [AdminController::class, 'saveMaintainConfig']);
     Route::get('/logout', [AdminController::class, 'logout']);
 });
+
+	
+Route::post('ckeditor/image_upload', 'CKEditorController@upload')->name('upload');
