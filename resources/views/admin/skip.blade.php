@@ -24,11 +24,11 @@
                             <div class="col-lg-4">
                                 <div class="form-group">
                                     <label>MSSV</label>
-                                    <input type="text" class="form-control" placeholder="10001" name="id" required>
+                                    <input type="text" class="form-control" placeholder="Nhập MSSV" name="id" required>
                                 </div>
                             </div>
                         </div>
-                        <input type="submit" value="Skip id" class="btn btn-primary">
+                        <input type="submit" value="Thêm id" class="btn btn-primary">
                     </form>
                 </div>
             </div>

@@ -87,10 +87,10 @@ class AdminController extends Controller
     {
         $id = $request->input('id');
         $name = $request->input('name');
-        Lecture::insert([
-            'id' => $id,
-            'name' => $name
-        ]);
+        $lecture = new Lecture;
+        $lecture->id = $id;
+        $lecture->name = $name;
+        $lecture->save();
         return redirect('admin/lectures');
     }
 
@@ -101,5 +101,14 @@ class AdminController extends Controller
             'page' => 'skip',
             'students' => $students
         ]);
+    }
+
+    public function addSkip(Request $request)
+    {
+        $id = $request->input('id');
+        $skip = new Skip;
+        $skip->id = $id;
+        $skip->save();
+        return redirect('admin/skips');
     }
 }
