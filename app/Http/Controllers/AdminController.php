@@ -72,4 +72,24 @@ class AdminController extends Controller
             'students' => $students
         ]);
     }
+
+    public function lecture()
+    {
+        $lectures = Lecture::orderBy('created_at', 'ASC')->paginate(100);
+        return view('admin/lecture', [
+            'page' => 'lectures',
+            'lectures' => $lectures
+        ]);
+    }
+
+    public function addLecture(Request $request)
+    {
+        $id = $request->input('id');
+        $name = $request->input('name');
+        Lecture::insert([
+            'id' => $id,
+            'name' => $name
+        ]);
+        return redirect('admin/lectures');
+    }
 }

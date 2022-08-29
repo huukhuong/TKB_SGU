@@ -15,6 +15,8 @@ Route::group(['prefix' => 'admin',  'middleware' => 'auth'], function () {
     Route::post('/', [AdminController::class, 'saveMaintainConfig']);
     Route::get('/logout', [AdminController::class, 'logout']);
     Route::get('/students', [AdminController::class, 'student']);
+    Route::get('/lectures', [AdminController::class, 'lecture']);
+    Route::post('/lectures', [AdminController::class, 'addLecture']);
 });
 
 	

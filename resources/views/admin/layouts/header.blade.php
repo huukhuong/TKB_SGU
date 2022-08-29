@@ -14,6 +14,14 @@
     <li class="nav-item d-none d-sm-inline-block">
       <a href="/admin" class="nav-link {{$page == 'blocks' ? 'active': ''}}">Quản lý block</a>
     </li>
+
+    <li class="nav-item d-none d-sm-inline-block">
+      <a href="/skips" class="nav-link {{$page == 'skips' ? 'active': ''}}">Quản lý block</a>
+    </li>
+
+    <li class="nav-item d-none d-sm-inline-block">
+      <a href="/admin" class="nav-link {{$page == 'lectures' ? 'active': ''}}">Danh sách giảng viên</a>
+    </li>
   </ul>
 
   <ul class="navbar-nav ml-auto">

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateLecturesTable extends Migration
+class RenameTablePassToSkip extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,7 @@ class CreateLecturesTable extends Migration
      */
     public function up()
     {
-        Schema::create('lectures', function (Blueprint $table) {
-            $table->string('id', 10)->primary();
-            $table->string('name', 50);
-            $table->timestamps();
-        });
+        Schema::rename('pass_students', 'skips');
     }
 
     /**
@@ -27,6 +23,8 @@ class CreateLecturesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('lectures');
+        Schema::table('skip', function (Blueprint $table) {
+            //
+        });
     }
 }

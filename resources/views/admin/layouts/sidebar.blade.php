@@ -35,6 +35,15 @@
         </li>
 
         <li class="nav-item">
+          <a href="/admin/skips" class="nav-link {{$page == 'skips' ? 'active': ''}}">
+            <i class="nav-icon fas fa-user-lock"></i>
+            <p>
+              Quản lý bộ đếm
+            </p>
+          </a>
+        </li>
+
+        <li class="nav-item">
           <a href="/admin/lectures" class="nav-link {{$page == 'lectures' ? 'active': ''}}">
             <i class="nav-icon fas fa-users"></i>
             <p>
