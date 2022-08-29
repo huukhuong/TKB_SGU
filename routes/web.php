@@ -18,7 +18,12 @@ Route::group(['prefix' => 'admin',  'middleware' => 'auth'], function () {
     Route::get('/lectures', [AdminController::class, 'lecture']);
     Route::post('/lectures', [AdminController::class, 'addLecture']);
     Route::get('/skips', [AdminController::class, 'skip']);
+    Route::get('/skips/delete/{id}', [AdminController::class, 'deleteSkip']);
     Route::post('/skips', [AdminController::class, 'addSkip']);
+
+    Route::get('/blocks', [AdminController::class, 'block']);
+    Route::get('/blocks/delete/{id}', [AdminController::class, 'deleteBlock']);
+    Route::post('/blocks', [AdminController::class, 'addBlock']);
 });
 
 	

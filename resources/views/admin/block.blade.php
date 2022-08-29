@@ -1,16 +1,16 @@
 @extends('admin/layouts/main')
 
 @section('title')
-    Danh sách bỏ qua
+    Danh sách chặn
 @endsection
 
 @section('pageName')
-    Danh sách bỏ qua
+    Danh sách chặn
 @endsection
 
 @section('breadcrumb')
     <li class="breadcrumb-item"><a href="/admin">Admin</a></li>
-    <li class="breadcrumb-item active">Danh sách bỏ qua</li>
+    <li class="breadcrumb-item active">Danh sách chặn</li>
 @endsection
 
 @section('content')
@@ -49,7 +49,7 @@
                                 <td>{{ $student->name }}</td>
                                 <td>{{ $student->created_at }}</td>
                                 <td>
-                                    <a href="/admin/skips/delete/{{ $student->id }}" class="btn btn-danger">
+                                    <a href="/admin/blocks/delete/{{ $student->id }}" class="btn btn-danger">
                                         Xóa
                                     </a>
                                 </td>

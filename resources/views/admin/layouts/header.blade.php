@@ -8,20 +8,25 @@
     </li>
 
     <li class="nav-item d-none d-sm-inline-block">
-      <a href="/admin" class="nav-link {{$page == 'students' ? 'active': ''}}">Thống kê truy cập</a>
+      <a href="/admin/students" class="nav-link {{$page == 'students' ? 'active': ''}}">Thống kê truy cập</a>
     </li>
 
     <li class="nav-item d-none d-sm-inline-block">
-      <a href="/admin" class="nav-link {{$page == 'blocks' ? 'active': ''}}">Quản lý block</a>
+      <a href="/admin/blocks" class="nav-link {{$page == 'blocks' ? 'active': ''}}">Danh sách block</a>
     </li>
 
     <li class="nav-item d-none d-sm-inline-block">
-      <a href="/skips" class="nav-link {{$page == 'skips' ? 'active': ''}}">Quản lý block</a>
+      <a href="/admin/skips" class="nav-link {{$page == 'skips' ? 'active': ''}}">Danh sách skip</a>
     </li>
 
     <li class="nav-item d-none d-sm-inline-block">
-      <a href="/admin" class="nav-link {{$page == 'lectures' ? 'active': ''}}">Danh sách giảng viên</a>
+      <a href="/admin/lectures" class="nav-link {{$page == 'lectures' ? 'active': ''}}">Danh sách giảng viên</a>
     </li>
+
+    <li class="nav-item d-none d-sm-inline-block">
+      <a href="/admin/notifications" class="nav-link {{$page == 'notifications' ? 'active': ''}}">Quản lý thông báo</a>
+    </li>
+
   </ul>
 
   <ul class="navbar-nav ml-auto">

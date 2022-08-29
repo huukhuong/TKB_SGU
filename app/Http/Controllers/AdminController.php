@@ -98,9 +98,16 @@ class AdminController extends Controller
     {
         $students = Skip::leftJoin('students', 'skips.id', '=', 'students.id')->get();
         return view('admin/skip', [
-            'page' => 'skip',
+            'page' => 'skips',
             'students' => $students
         ]);
+    }
+
+    public function deleteSkip()
+    {
+        $id = request('id');
+        Skip::where('id', $id)->delete();
+        return redirect('admin/skips');
     }
 
     public function addSkip(Request $request)
@@ -110,5 +117,30 @@ class AdminController extends Controller
         $skip->id = $id;
         $skip->save();
         return redirect('admin/skips');
+    }
+
+    public function block()
+    {
+        $students = Block::leftJoin('students', 'blocks.id', '=', 'students.id')->get();
+        return view('admin/block', [
+            'page' => 'blocks',
+            'students' => $students
+        ]);
+    }
+
+    public function deleteBlock()
+    {
+        $id = request('id');
+        Block::where('id', $id)->delete();
+        return redirect('admin/blocks');
+    }
+
+    public function addBlock(Request $request)
+    {
+        $id = $request->input('id');
+        $block = new Block;
+        $block->id = $id;
+        $block->save();
+        return redirect('admin/blocks');
     }
 }
