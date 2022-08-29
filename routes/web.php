@@ -17,6 +17,7 @@ Route::group(['prefix' => 'admin',  'middleware' => 'auth'], function () {
     Route::get('/students', [AdminController::class, 'student']);
     Route::get('/lectures', [AdminController::class, 'lecture']);
     Route::post('/lectures', [AdminController::class, 'addLecture']);
+    Route::get('/skips', [AdminController::class, 'skip']);
 });
 
 	
