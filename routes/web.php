@@ -24,6 +24,11 @@ Route::group(['prefix' => 'admin',  'middleware' => 'auth'], function () {
     Route::get('/blocks', [AdminController::class, 'block']);
     Route::get('/blocks/delete/{id}', [AdminController::class, 'deleteBlock']);
     Route::post('/blocks', [AdminController::class, 'addBlock']);
+
+    Route::get('/notifications', [AdminController::class, 'notification']);
+    Route::get('/notifications/delete/{id}', [AdminController::class, 'deleteNotification']);
+    Route::get('/notifications/add', [AdminController::class, 'addNotification']);
+    Route::post('/notifications/add', [AdminController::class, 'createNotification']);
 });
 
 	

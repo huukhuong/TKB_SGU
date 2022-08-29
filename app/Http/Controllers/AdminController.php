@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Block;
 use App\Models\Config;
 use App\Models\Lecture;
+use App\Models\Notification;
 use App\Models\Skip;
 use App\Models\Student;
 use Illuminate\Http\Request;
@@ -23,6 +24,7 @@ class AdminController extends Controller
         $countPass = Skip::count();
         return view('admin/index', [
             'page' => 'index',
+            'pageExtends' => '',
             'maintain' => $maintain,
             'counter' => $counter,
             'lecturesCount' => $lecturesCount,
@@ -70,6 +72,7 @@ class AdminController extends Controller
         $students = Student::orderBy('visited_at', 'DESC')->paginate(200);
         return view('admin/student', [
             'page' => 'students',
+            'pageExtends' => '',
             'students' => $students
         ]);
     }
@@ -79,6 +82,7 @@ class AdminController extends Controller
         $lectures = Lecture::orderBy('created_at', 'ASC')->paginate(100);
         return view('admin/lecture', [
             'page' => 'lectures',
+            'pageExtends' => '',
             'lectures' => $lectures
         ]);
     }
@@ -99,6 +103,7 @@ class AdminController extends Controller
         $students = Skip::leftJoin('students', 'skips.id', '=', 'students.id')->get();
         return view('admin/skip', [
             'page' => 'skips',
+            'pageExtends' => '',
             'students' => $students
         ]);
     }
@@ -124,6 +129,7 @@ class AdminController extends Controller
         $students = Block::leftJoin('students', 'blocks.id', '=', 'students.id')->get();
         return view('admin/block', [
             'page' => 'blocks',
+            'pageExtends' => '',
             'students' => $students
         ]);
     }
@@ -142,5 +148,48 @@ class AdminController extends Controller
         $block->id = $id;
         $block->save();
         return redirect('admin/blocks');
+    }
+
+    public function notification()
+    {
+        $notifications = Notification::all();
+        return view('admin/notification', [
+            'page' => 'notifications',
+            'pageExtends' => 'list-notifications',
+            'notifications' => $notifications
+        ]);
+    }
+
+    public function deleteNotification()
+    {
+        $id = request('id');
+        Notification::where('id', $id)->delete();
+        return redirect('admin/notifications');
+    }
+
+    public function addNotification()
+    {
+        return view('admin/addNotification', [
+            'page' => 'notifications',
+            'pageExtends' => 'add-notification'
+        ]);
+    }
+
+    public function createNotification(Request $request)
+    {
+        $type = $request->input('type');
+        $position = $request->input('position');
+        $order = $request->input('order');
+        $content = $request->input('content');
+
+        $notification = new Notification;
+        $notification->type = $type;
+        $notification->position = $position;
+        $notification->order = $order;
+        $notification->content = $content;
+
+        $notification->save();
+
+        return redirect('admin/notifications');
     }
 }

@@ -54,13 +54,29 @@
                     </a>
                 </li>
 
-                <li class="nav-item">
-                    <a href="/admin/notifications" class="nav-link {{ $page == 'notifications' ? 'active' : '' }}">
+                <li class="{{ $page == 'notifications' ? 'nav-item menu-is-opening menu-open' : 'nav-item' }}">
+                    <a href="#" class="nav-link {{ $page == 'notifications' ? 'active' : '' }}">
                         <i class="nav-icon ion ion-chatbox-working"></i>
                         <p>
                             Quản lý thông báo
+                            <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
+                    <ul class="nav nav-treeview" style="display: none;">
+                        <li class="nav-item">
+                            <a href="/admin/notifications" class="nav-link {{ $pageExtends == 'list-notifications' ? 'active' : '' }}">
+                                <i class="fas fa-list nav-icon"></i>
+                                <p>Xem danh sách</p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="/admin/notifications/add" class="nav-link {{ $pageExtends == 'add-notification' ? 'active' : '' }}">
+                                <i class="fas fa-plus nav-icon"></i>
+                                <p>Thêm mới</p>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
 
             </ul>
