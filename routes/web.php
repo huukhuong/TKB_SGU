@@ -14,9 +14,14 @@ Route::group(['prefix' => 'admin',  'middleware' => 'auth'], function () {
     Route::get('/', [AdminController::class, 'index']);
     Route::post('/', [AdminController::class, 'saveMaintainConfig']);
     Route::get('/logout', [AdminController::class, 'logout']);
+
     Route::get('/students', [AdminController::class, 'student']);
+    Route::post('/students', [AdminController::class, 'searchStudent']);
+
+
     Route::get('/lectures', [AdminController::class, 'lecture']);
     Route::post('/lectures', [AdminController::class, 'addLecture']);
+
     Route::get('/skips', [AdminController::class, 'skip']);
     Route::get('/skips/delete/{id}', [AdminController::class, 'deleteSkip']);
     Route::post('/skips', [AdminController::class, 'addSkip']);

@@ -73,9 +73,37 @@ class AdminController extends Controller
         return view('admin/student', [
             'page' => 'students',
             'pageExtends' => '',
+            'type' => 'byName',
+            'keyword' => '',
             'students' => $students
         ]);
     }
+
+    public function searchStudent(Request $request)
+    {
+        $type = $request->input('type');
+        $keyword = $request->input('keyword');
+        $keywords = explode("\n", str_replace("\r", "", $keyword));
+
+        if ($type == 'byName') {
+            $students =
+                Student::where(function ($query) use ($keywords) {
+                    for ($i = 0; $i < count($keywords); $i++) {
+                        $query->orwhere('name', 'like',  '%' . $keywords[$i] . '%');
+                    }
+                })->paginate(200);
+        } else {
+            $students = Student::whereIn('id', $keywords)->orderBy('visited_at', 'DESC')->paginate(200);
+        }
+        return view('admin/student', [
+            'page' => 'students',
+            'pageExtends' => '',
+            'type' => $type,
+            'keyword' => $keyword,
+            'students' => $students
+        ]);
+    }
+
 
     public function lecture()
     {

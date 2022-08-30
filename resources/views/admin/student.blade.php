@@ -14,6 +14,33 @@
 @endsection
 
 @section('content')
+    <div class="col-12">
+        <div class="card card-primary">
+            <div class="card-body">
+                <form method="post">
+                    @csrf
+                    <div class="form-group">
+                        <label>Nhập thông tin tìm kiếm</label>
+                        <textarea name="keyword" rows="5" class="form-control" placeholder="Mỗi từ khóa cách nhau 1 dòng">{{ $keyword }}</textarea>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="type" value="byId" id="byId"
+                                {{ $type == 'byId' ? 'checked' : '' }}>
+                            <label for="byId" class="form-check-label">Tìm theo mã</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="type" value="byName" id="byName"
+                                {{ $type == 'byId' ? '' : 'checked' }}>
+                            <label for="byName" class="form-check-label">Tìm theo tên</label>
+                        </div>
+                    </div>
+
+                    <input type="submit" value="Tìm kiếm" class="btn btn-primary">
+                </form>
+            </div>
+        </div>
+    </div>
     {{ $students->links('admin/layouts/pagination') }}
     <div class="col-12">
         <div class="card card-primary">
