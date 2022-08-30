@@ -33,7 +33,8 @@
                     @endforeach
 
                     <div class="form mt-0">
-                        <form action="./schedule.php" method="post">
+                        <form action="/timetable" method="post">
+                            @csrf
                             <div class="shadow"></div>
                             <div class="form-group">
                                 <i class="fas fa-search icon-form"></i>

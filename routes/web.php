@@ -5,6 +5,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\WebController;
 
 Route::get('/', [WebController::class, 'index']);
+Route::post('timetable', [WebController::class, 'timetable']);
 
 Route::get('login', [AdminController::class, 'getLogin'])->name('login');;
 Route::post('login', [AdminController::class, 'postLogin']);

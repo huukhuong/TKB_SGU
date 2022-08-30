@@ -28,4 +28,11 @@ class WebController extends Controller
             ]);
         }
     }
+
+    public function timetable(Request $request)
+    {
+        return view('timetable', [
+            'id' => $request->input('id')
+        ]);
+    }
 }
