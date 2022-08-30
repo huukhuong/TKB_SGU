@@ -2,10 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\WebController;
 
-Route::get('/', function () {
-    return view('homepage');
-});
+Route::get('/', [WebController::class, 'index']);
 
 Route::get('login', [AdminController::class, 'getLogin'])->name('login');;
 Route::post('login', [AdminController::class, 'postLogin']);
@@ -36,5 +35,5 @@ Route::group(['prefix' => 'admin',  'middleware' => 'auth'], function () {
     Route::post('/notifications/add', [AdminController::class, 'createNotification']);
 });
 
-	
+
 Route::post('ckeditor/image_upload', 'CKEditorController@upload')->name('upload');
