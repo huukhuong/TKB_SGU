@@ -111,7 +111,8 @@ const drawSchedule = (arr) => {
         let idCell = start + '_' + day;
         let cell = document.getElementById(idCell);
         if (cell != null) {
-            if (cell.className == 'course') {
+            // cell.classList == 'course' : bị bỏ qua vì className không chỉ có mỗi course
+            if (cell.classList.contains('course')) {
                 continue;
             }
             let tengiaovien = "";
