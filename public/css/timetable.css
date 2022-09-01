@@ -2,18 +2,36 @@
   --title-color: #333;
   --empty-color: #F2F2F2;
   --basic-col-color: #fff;
-  --primary-2-color: #0665e0;
-  --course-2-color: #639eeb2c;
-  --primary-1-color: #369925;
-  --course-1-color: #3894281a;
+
   --primary-color: #F75C1E;
   --course-color: #f75b1e2f;
-  --primary-3-color: #32ABC6;
-  --course-3-color: #c8ece870;
-  --primary-4-color: #ec9f3f;
-  --course-4-color: #f7b76842;
-  --primary-5-color: #985bc7;
-  --course-5-color: #e1c2fb73;
+
+  --primary-2-color: #369925;
+  --course-2-color: #3894281a;
+
+  --primary-3-color: #0665e0;
+  --course-3-color: #639eeb2c;
+
+  --primary-4-color: #32ABC6;
+  --course-4-color: #c8ece870;
+
+  --primary-5-color: #ec9f3f;
+  --course-5-color: #f7b76842;
+
+  --primary-6-color: #985bc7;
+  --course-6-color: #e1c2fb73;
+
+  --primary-7-color: #EA1E63;
+  --course-7-color: #EA1E632A;
+
+  --primary-8-color: #009788;
+  --course-8-color: #0097882A;
+
+  --primary-9-color: #795547;
+  --course-9-color: #7955472A;
+
+  --primary-10-color: #607D8B;
+  --course-10-color: #607D8B2A;
 }
 
 * {
@@ -63,10 +81,10 @@ td div {
   width: 45px;
   height: 45px;
   /* margin: 8px; */
-  border: 4px solid var(--primary-2-color);
+  border: 4px solid var(--primary-3-color);
   border-radius: 50%;
   animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-  border-color: var(--primary-2-color) transparent transparent transparent;
+  border-color: var(--primary-3-color) transparent transparent transparent;
 }
 
 .lds-ring div:nth-child(1) {
@@ -140,28 +158,48 @@ td div {
 }
 
 .course-1 {
-  background-color: var(--course-1-color);
-  color: var(--primary-1-color) !important;
-}
-
-.course-2 {
   background-color: var(--course-2-color);
   color: var(--primary-2-color) !important;
 }
 
-.course-3 {
+.course-2 {
   background-color: var(--course-3-color);
   color: var(--primary-3-color) !important;
 }
 
-.course-4 {
+.course-3 {
   background-color: var(--course-4-color);
   color: var(--primary-4-color) !important;
 }
 
-.course-5 {
+.course-4 {
   background-color: var(--course-5-color);
   color: var(--primary-5-color) !important;
+}
+
+.course-5 {
+  background-color: var(--course-6-color);
+  color: var(--primary-6-color) !important;
+}
+
+.course-6 {
+  background-color: var(--course-7-color);
+  color: var(--primary-7-color) !important;
+}
+
+.course-7 {
+  background-color: var(--course-8-color);
+  color: var(--primary-8-color) !important;
+}
+
+.course-8 {
+  background-color: var(--course-9-color);
+  color: var(--primary-9-color) !important;
+}
+
+.course-9 {
+  background-color: var(--course-10-color);
+  color: var(--primary-10-color) !important;
 }
 
 .course::after {
@@ -180,23 +218,39 @@ td div {
 }
 
 .course-1::after {
-  background-color: var(--primary-1-color) !important;
-}
-
-.course-2::after {
   background-color: var(--primary-2-color) !important;
 }
 
-.course-3::after {
+.course-2::after {
   background-color: var(--primary-3-color) !important;
 }
 
-.course-4::after {
+.course-3::after {
   background-color: var(--primary-4-color) !important;
 }
 
-.course-5::after {
+.course-4::after {
   background-color: var(--primary-5-color) !important;
+}
+
+.course-5::after {
+  background-color: var(--primary-6-color) !important;
+}
+
+.course-6::after {
+  background-color: var(--primary-7-color) !important;
+}
+
+.course-7::after {
+  background-color: var(--primary-8-color) !important;
+}
+
+.course-8::after {
+  background-color: var(--primary-9-color) !important;
+}
+
+.course-9::after {
+  background-color: var(--primary-10-color) !important;
 }
 
 .text-color {

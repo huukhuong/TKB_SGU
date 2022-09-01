@@ -1,5 +1,3 @@
-const id = $('#id').val();
-
 // Vẽ bảng rỗng
 const table_body = $('#tbody');
 // vẽ 12 hàng ngang
@@ -20,16 +18,15 @@ for (let i = 1; i <= 12; i++) {
   table_body.append(row);
 }
 
+const id = $('#id').val();
 fetch(`/api/getTimeTableByStudentId/${id}`)
   .then(jsonText => jsonText.json())
   .then(json => {
     if (json.isSuccess) {
       $('#loading').hide();
-
       $('#studentId').text(json.additionalData.id);
       $('#studentName').text(json.additionalData.name);
       $('#studentFaculty').text(json.additionalData.faculty);
-
       drawSchedule(json.data);
     } else {
       alert(json.message);
@@ -49,29 +46,31 @@ const drawSchedule = (data) => {
     const cell = $(`#d${day}_s${start}`);
     if (cell) {
       // cell.classList == 'course' : bị bỏ qua vì className không chỉ có mỗi course
-      // if (cell.classList && cell.classList.contains('course')) {
-      //   continue;
-      // }
+      // API v2 đã fix lỗi này
+      if (cell.classList && cell.classList.contains('course')) {
+        // do nothing
+      }
+      else {
+        cell.attr('rowspan', total);
 
-      cell.attr('rowspan', total);
+        cell.html("<span class='text-color'>" + item.name + "</span>" + "<br />" +
+          "<i class='text-mutted'>Phòng: </i>" +
+          "<span class='text-color'>" + item.room + "</span>" + "<br />" +
+          "<i class='text-mutted'>Giảng viên: </i>" +
+          "<span class='text-color'>" + item.teacherName + "</span>" + "<br />");
 
-      cell.html("<span class='text-color'>" + item.name + "</span>" + "<br />" +
-        "<i class='text-mutted'>Phòng: </i>" +
-        "<span class='text-color'>" + item.room + "</span>" + "<br />" +
-        "<i class='text-mutted'>Giảng viên: </i>" +
-        "<span class='text-color'>" + item.teacherName + "</span>" + "<br />");
+        const courseType = item.group;
+        cell.addClass('course');
+        cell.addClass(`course-${courseType}`);
+      }
 
-      const courseType = item.group;
-      cell.addClass('course');
-      cell.addClass(`course-${courseType}`);
-    }
-
-    let affected = item.sectionStart;
-    for (let j = 0; j < item.totalSection - 1; j++) {
-      affected++;
-      const row = $(`#d${day}_s${affected}`);
-      if (row != null) {
-        row.remove();
+      let affected = item.sectionStart;
+      for (let j = 0; j < item.totalSection - 1; j++) {
+        affected++;
+        const row = $(`#d${day}_s${affected}`);
+        if (row != null) {
+          row.remove();
+        }
       }
     }
   });
