@@ -52,16 +52,17 @@ class WebController extends Controller
         }
         try {
             $url = "http://thongtindaotao.sgu.edu.vn/Default.aspx?page=thoikhoabieu&sta=1&id=$id";
-
             // get html from website
             $html = file_get_html($url);
 
             // Lấy cái div chứa mớ table con, mỗi table con lại là 1 môn học
             $divNode = $html->find('.grid-roll2', 0);
 
+            // Check xem MSSV chuẩn chưa
             if (is_null($divNode)) {
                 return response()->json([
                     'code' => 404,
+                    'status' => 'Not found',
                     'isSuccess' => false,
                     'message' => "Can't get data by id $id",
                     'additionalData' => null,
@@ -121,8 +122,8 @@ class WebController extends Controller
 
                 for ($k = 0; $k < $length; $k++) {
                     $weekdayName = $listDays[$k];
-                    $sectionStart = $listStarts[$k];
-                    $sectionTotal = $listTotals[$k];
+                    $sectionStart = (int)$listStarts[$k];
+                    $sectionTotal = (int)$listTotals[$k];
                     $sectionEnd = $sectionStart + $sectionTotal  - 1;
                     $room = $listRooms[$k];
                     $teacherCode = $listTeachers[$k];
@@ -178,20 +179,23 @@ class WebController extends Controller
             $hoTen = str_replace(":", ": ", $hoTen);
             $khoa = $html->find('#ctl00_ContentPlaceHolder1_ctl00_lblContentLopSV', 0)->text();
 
+            $student = new stdClass();
+            $student->id = $msv;
+            $student->name = $hoTen;
+            $student->faculty = $khoa;
+
             return response()->json([
                 'code' => 200,
+                'status' => 'OK',
                 'isSuccess' => true,
                 'message' => 'Successfully',
-                'additionalData' => [
-                    'id' => $msv,
-                    'name' => $hoTen,
-                    'faculty' => $khoa
-                ],
+                'additionalData' => $student,
                 'data' => $listResult,
             ]);
         } catch (Exception $e) {
             return response()->json([
                 'code' => 500,
+                'status' => 'Internal Server Error',
                 'isSuccess' => false,
                 'message' => $e->getMessage(),
                 'additionalData' => null,
