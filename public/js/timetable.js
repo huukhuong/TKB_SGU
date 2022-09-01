@@ -1,167 +1,80 @@
 const id = $('#id').val();
 
+// Vẽ bảng rỗng
+const table_body = $('#tbody');
+// vẽ 12 hàng ngang
+for (let i = 1; i <= 12; i++) {
+  const row = document.createElement('tr');
+  for (let j = 1; j <= 8; j++) {
+    const className = 'col_basic';
+    const col = document.createElement('td');
+    if (j == 1 || j == 8) {
+      col.className = 'stt';
+      col.innerHTML = '<div>' + 'Tiết ' + i + '</div>';
+    } else {
+      col.id = `d${j}_s${i}`;
+      col.className = className;
+    }
+    row.append(col);
+  }
+  table_body.append(row);
+}
+
 fetch(`/api/getTimeTableByStudentId/${id}`)
   .then(jsonText => jsonText.json())
   .then(json => {
-    $('#loading').hide();
+    if (json.isSuccess) {
+      $('#loading').hide();
 
-    console.log('Response', json);
+      $('#studentId').text(json.additionalData.id);
+      $('#studentName').text(json.additionalData.name);
+      $('#studentFaculty').text(json.additionalData.faculty);
 
-    drawSchedule([]);
+      drawSchedule(json.data);
+    } else {
+      alert(json.message);
+      history.back();
+    }
   })
   .catch(e => {
     console.log(e);
   })
 
-const randomIntFromInterval = (min, max) => {
-  return Math.floor(Math.random() * (max - min + 1) + min)
-}
+const drawSchedule = (data) => {
+  data.map((item, index) => {
+    const start = item.sectionStart;
+    const day = item.weekdayNumber;
+    const total = item.totalSection;
 
-const drawSchedule = (arr) => {
-  console.log("Begin draw");
-
-  // let studentInfo = $('#studentInfo');
-  // studentInfo.html(
-  //   '<span class="text-mutted">MSSV: </span>' +
-  //   '<span class="info-text-color">' + arr[arr.length - 1].name + '</span>' +
-  //   '<span class="text-mutted space_left">Họ tên: </span>' +
-  //   '<span class="info-text-color">' + arr[arr.length - 1].day + '</span>' +
-  //   '<span class="text-mutted space_left">Lớp: </span>' +
-  //   '<span class="info-text-color">' + arr[arr.length - 1].start + '</span>'
-  // );
-  for (let i = 0; i < arr.length - 1; i++) {
-    arr[i].start = parseInt(arr[i].start);
-    arr[i].total = parseInt(arr[i].total);
-
-    switch (arr[i].day) {
-      case 'Hai':
-        arr[i].day = 2;
-        break;
-      case 'Ba':
-        arr[i].day = 3;
-        break;
-      case 'Tư':
-        arr[i].day = 4;
-        break;
-      case 'Năm':
-        arr[i].day = 5;
-        break;
-      case 'Sáu':
-        arr[i].day = 6;
-        break;
-      case 'Bảy':
-        arr[i].day = 7;
-        break;
-    }
-  }
-  // sort từ t2 -> t7
-  for (let i = 0; i < arr.length - 2; i++) {
-    for (let j = i + 1; j < arr.length - 1; j++) {
-      if (arr[i].day > arr[j].day) {
-        let temp = arr[i];
-        arr[i] = arr[j];
-        arr[j] = temp;
-      }
-    }
-  }
-  // sort theo total, nhưng giữ nguyên thứ
-  for (let i = 0; i < arr.length - 2; i++) {
-    for (let j = i + 1; j < arr.length - 1; j++) {
-      if (arr[i].total < arr[j].total && arr[i].day == arr[j].day) {
-        let temp = arr[i];
-        arr[i] = arr[j];
-        arr[j] = temp;
-      }
-    }
-  }
-  let table_body = $('#tbody');
-  // vẽ 12 hàng ngang
-  for (let i = 1; i <= 12; i++) {
-    let row = document.createElement('tr');
-    for (let j = 1; j <= 8; j++) {
-      let col = document.createElement('td');
-      const className = ' col_basic';
-      if (j == 1 || j == 8) {
-        col.className = 'stt';
-        col.innerHTML = '<div>' + 'Tiết ' + i + '</div>';
-      } else {
-        col.id = i + '_' + j;
-        col.className = className;
-      }
-      row.append(col);
-    }
-    table_body.append(row);
-  }
-
-  for (let i = 0; i < arr.length - 1; i++) {
-    let start = arr[i].start * 1;
-    let day = arr[i].day * 1;
-    let total = arr[i].total * 1;
-
-    if (start == null) {
-      continue;
-    }
-
-    let idCell = start + '_' + day;
-    let cell = document.getElementById(idCell);
-    if (cell != null) {
+    const cell = $(`#d${day}_s${start}`);
+    if (cell) {
       // cell.classList == 'course' : bị bỏ qua vì className không chỉ có mỗi course
-      if (cell.classList.contains('course')) {
-        continue;
-      }
-      let tengiaovien = "";
+      // if (cell.classList && cell.classList.contains('course')) {
+      //   continue;
+      // }
 
-      cell.rowSpan = arr[i].total;
-      if (typeof (DSGV[parseInt(arr[i].teacher)]) != "undefined") {
-        tengiaovien = DSGV[parseInt(arr[i].teacher)];
-        cell.innerHTML = "<span class='text-color'>" + arr[i].name + "</span>" + "<br />" +
-          "<i class='text-mutted'>Phòng: </i>" +
-          "<span class='text-color'>" + arr[i].room + "</span>" + "<br />" +
-          "<i class='text-mutted'>Giảng viên: </i>" +
-          "<span class='text-color'>" + tengiaovien + "</span>" + "<br />";
-      }
-      else {
-        let room = "<i class='text-mutted'>Phòng: </i>" +
-          "<span class='text-color'>" + arr[i].room + "</span>" + "<br />";
-        if (arr[i].room === null) {
-          room = "";
-        }
-        cell.innerHTML = "<span class='text-color'>" + arr[i].name + "</span>" + "<br />" +
-          room +
-          "<i class='text-mutted'></span>" + "<br />";
-      }
-      let courseType = 0;
-      switch (arr[i].day) {
-        case 2:
-          courseType = 0;
-          break;
-        case 3:
-          courseType = 1;
-          break;
-        case 4:
-          courseType = 2;
-          break;
-        case 5:
-          courseType = 3;
-          break;
-        case 6:
-          courseType = 4;
-          break;
-        case 7:
-          courseType = 5;
-          break;
-      }
-      cell.className = 'course ' + cell.className + ' course-' + courseType;
+      cell.attr('rowspan', total);
+
+      cell.html("<span class='text-color'>" + item.name + "</span>" + "<br />" +
+        "<i class='text-mutted'>Phòng: </i>" +
+        "<span class='text-color'>" + item.room + "</span>" + "<br />" +
+        "<i class='text-mutted'>Giảng viên: </i>" +
+        "<span class='text-color'>" + item.teacherName + "</span>" + "<br />");
+
+      const courseType = item.group;
+      cell.addClass('course');
+      cell.addClass(`course-${courseType}`);
     }
 
-    for (let j = 0; j < total - 1; j++) {
-      start++;
-      let row = document.getElementById(start + '_' + day)
+    let affected = item.sectionStart;
+    for (let j = 0; j < item.totalSection - 1; j++) {
+      affected++;
+      const row = $(`#d${day}_s${affected}`);
       if (row != null) {
         row.remove();
       }
     }
-  }
+  });
   // thêm hàng thứ vào cuối
   const lastRow = document.createElement('tr');
   lastRow.innerHTML =

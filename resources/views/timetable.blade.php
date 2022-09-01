@@ -23,11 +23,11 @@
     <div class="main">
         <div id="studentInfo">
             <span class="text-mutted mr-2">MSSV:</span>
-            <span class="info-text-color">3119410204</span>
+            <span class="info-text-color" id="studentId"></span>
             <span class="text-mutted mr-2 space_left">Họ tên:</span>
-            <span class="info-text-color">Trần Hữu Khương</span>
+            <span class="info-text-color" id="studentName"></span>
             <span class="text-mutted mr-2 space_left">Lớp:</span>
-            <span class="info-text-color">DCT1197 - Ngành: Công nghệ thông tin - Khoa: Công nghệ thông tin</span>
+            <span class="info-text-color" id="studentFaculty"></span>
         </div>
         <div id="capture">
             <table id="table">

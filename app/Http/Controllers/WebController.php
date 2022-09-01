@@ -21,8 +21,8 @@ class WebController extends Controller
             ]);
         } else {
             $counter = Config::where('key', 'counter')->first();
-            $topNotifications = Notification::where('position', 'top')->where('order', '>', '0')->groupBy('order')->get();
-            $bottomNotifications = Notification::where('position', 'bottom')->where('order', '>', '0')->groupBy('order')->get();
+            $topNotifications = Notification::where('position', 'top')->where('order', '>', '0')->orderBy('order')->get();
+            $bottomNotifications = Notification::where('position', 'bottom')->where('order', '>', '0')->orderBy('order')->get();
 
             return view('home', [
                 'counter' => $counter,
@@ -149,28 +149,43 @@ class WebController extends Controller
                 }
             }
 
-            // Group lại môn học theo mã môn
+            // Sort lại môn học theo mã môn
             $courseCount = count($listResult);
             for ($i = 0; $i < $courseCount - 1; $i++) {
                 for ($j = $i + 1; $j < $courseCount; $j++) {
                     if ($listResult[$i]->id < $listResult[$j]->id) {
-                        $temp = $listResult[$i];
-                        $listResult[$i] = $listResult[$j];
-                        $listResult[$j] = $temp;
+                        $this->swap($listResult[$i], $listResult[$j]);
                     }
                 }
             }
 
             // Đánh số theo group môn
-            $group = 1;
+            $group = 0;
             $preId = $listResult[0]->id;
-
             for ($i = 0; $i < $courseCount; $i++) {
                 if ($preId != $listResult[$i]->id) {
                     $preId = $listResult[$i]->id;
                     $group++;
                 }
                 $listResult[$i]->group = $group;
+            }
+
+            // Sort theo ngày học (thứ)
+            for ($i = 0; $i < $courseCount - 1; $i++) {
+                for ($j = $i + 1; $j < $courseCount; $j++) {
+                    if ($listResult[$i]->weekdayNumber > $listResult[$j]->weekdayNumber) {
+                        $this->swap($listResult[$i], $listResult[$j]);
+                    }
+                }
+            }
+
+            // Sort theo tiết bắt đầu
+            for ($i = 0; $i < $courseCount - 1; $i++) {
+                for ($j = $i + 1; $j < $courseCount; $j++) {
+                    if ($listResult[$i]->sectionStart > $listResult[$j]->sectionStart) {
+                        $this->swap($listResult[$i], $listResult[$j]);
+                    }
+                }
             }
 
             // Get thông tin sinh viên
@@ -202,6 +217,13 @@ class WebController extends Controller
                 'data' => null,
             ]);
         }
+    }
+
+    private function swap(&$a, &$b)
+    {
+        $temp = $a;
+        $a = $b;
+        $b = $temp;
     }
 
     private function getDayNum($dayString)
