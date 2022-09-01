@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Block;
 use App\Models\Config;
 use App\Models\Lecture;
 use App\Models\Notification;
@@ -45,7 +46,7 @@ class WebController extends Controller
             return response()->json([
                 'code' => 404,
                 'isSuccess' => false,
-                'message' => "$id not an id",
+                'message' => "Mã: $id không hợp lệ",
                 'additionalData' => null,
                 'data' => null,
             ]);
@@ -58,13 +59,14 @@ class WebController extends Controller
             // Lấy cái div chứa mớ table con, mỗi table con lại là 1 môn học
             $divNode = $html->find('.grid-roll2', 0);
 
-            // Check xem MSSV chuẩn chưa
-            if (is_null($divNode)) {
+            // Check xem MSSV chuẩn chưa & check block
+            $block = Block::find($id);
+            if (is_null($divNode) || !is_null($block)) {
                 return response()->json([
                     'code' => 404,
                     'status' => 'Not found',
                     'isSuccess' => false,
-                    'message' => "Can't get data by id $id",
+                    'message' => "Không thể truy vấn dữ liệu của $id",
                     'additionalData' => null,
                     'data' => null,
                 ]);
@@ -203,7 +205,7 @@ class WebController extends Controller
                 'code' => 200,
                 'status' => 'OK',
                 'isSuccess' => true,
-                'message' => 'Successfully',
+                'message' => 'Dữ liệu được get thành công',
                 'additionalData' => $student,
                 'data' => $listResult,
             ]);
