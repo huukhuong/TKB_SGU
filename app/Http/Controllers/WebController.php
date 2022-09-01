@@ -6,6 +6,9 @@ use App\Models\Block;
 use App\Models\Config;
 use App\Models\Lecture;
 use App\Models\Notification;
+use App\Models\Skip;
+use App\Models\Student;
+use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
 use stdClass;
@@ -200,6 +203,57 @@ class WebController extends Controller
             $student->id = $msv;
             $student->name = $hoTen;
             $student->faculty = $khoa;
+
+            // Ghi log
+            // check xem có trong danh sách skip ko
+            $skip = Skip::find($msv);
+            if (is_null($skip)) {
+                $studentGet = Student::find($msv);
+                // Student chưa lưu => tạo trong db, ngược lại thì update số lần truy cập
+                if (is_null($studentGet)) {
+                    $newStudent = new Student;
+                    $newStudent->id = $msv;
+
+                    // input: $hoTen = Trần Hữu Khương - Ngày sinh: 25/10/2001
+                    // output: [0] => Trần Hữu Khương || [1] => 25/10/2001
+                    $nameAndBirthday = explode(" - Ngày sinh: ", $hoTen);
+                    $newStudent->name = $nameAndBirthday[0];
+                    $newStudent->birthday = $nameAndBirthday[1];
+
+                    // input: $khoa = DCT1197 - Ngành: Công nghệ thông tin - Khoa: Công nghệ thông tin
+                    // output: [0] => DCT1197 || [1] => Ngành: Công nghệ thông tin || [2] => Khoa: Công nghệ thông tin
+                    $classWithBranchAndFaculty = explode(" - Ngành: ", $khoa);
+                    // $classWithBranchAndFaculty[0] => DCT1197 || [1] => Công nghệ thông tin - Khoa: Công nghệ thông tin
+                    $branchAndFaculty = explode(' - Khoa: ', $classWithBranchAndFaculty[1]);
+                    // $branchAndFaculty[0]: Công nghệ thông tin (ngành) || [1] => Công nghệ thông tin (khoa)
+
+                    $newStudent->class = $classWithBranchAndFaculty[0];
+                    $newStudent->branch = $branchAndFaculty[0];
+                    $newStudent->faculty = $branchAndFaculty[1];
+
+                    $newStudent->visited_at = Carbon::now();
+                    $newStudent->visit_count = 1;
+                    $newStudent->save();
+                } else {
+                    $studentGet->visited_at = Carbon::now();
+                    $studentGet->visit_count++;
+
+                    // Vì lần trước code ngu, nhiều SV bị sai khoa ngành, nên thực hiện lưu lại
+                    $classWithBranchAndFaculty = explode(" - Ngành: ", $khoa);
+                    $branchAndFaculty = explode(' - Khoa: ', $classWithBranchAndFaculty[1]);
+
+                    $studentGet->class = $classWithBranchAndFaculty[0];
+                    $studentGet->branch = $branchAndFaculty[0];
+                    $studentGet->faculty = $branchAndFaculty[1];
+
+                    $studentGet->save();
+                }
+
+                // Counter
+                $config = Config::where('key', 'counter')->first();
+                $config->value++;
+                $config->save();
+            }
 
             return response()->json([
                 'code' => 200,
