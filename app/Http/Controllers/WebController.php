@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Config;
 use App\Models\Lecture;
 use App\Models\Notification;
-use App\Models\Student;
 use Exception;
 use Illuminate\Http\Request;
 use stdClass;
@@ -22,8 +21,8 @@ class WebController extends Controller
             ]);
         } else {
             $counter = Config::where('key', 'counter')->first();
-            $topNotifications = Notification::where('position', 'top')->where('order', '>', '0')->orderBy('order')->get();
-            $bottomNotifications = Notification::where('position', 'bottom')->where('order', '>', '0')->orderBy('order')->get();
+            $topNotifications = Notification::where('position', 'top')->where('order', '>', '0')->groupBy('order')->get();
+            $bottomNotifications = Notification::where('position', 'bottom')->where('order', '>', '0')->groupBy('order')->get();
 
             return view('home', [
                 'counter' => $counter,
@@ -130,22 +129,47 @@ class WebController extends Controller
                     $teacher = Lecture::find($teacherCode);
                     $teacherName = $teacher ? $teacher->name : 'Chưa có thông tin';
 
-                    $course = [
-                        "id" => $id,
-                        "name" => $name,
-                        "weekdayName" => $weekdayName,
-                        "weekdayNumber" => $this->getDayNum($weekdayName),
-                        "sectionStart" => $sectionStart,
-                        "sectionEnd" => $sectionEnd,
-                        "totalSection" => $sectionTotal,
-                        "startTime" => $this->getTimeStart($sectionStart),
-                        "endTime" => $this->getTimeEnd($sectionEnd),
-                        "room" => $room,
-                        "teacherCode" => $teacherCode,
-                        "teacherName" => $teacherName
-                    ];
+                    $course = new stdClass();
+                    $course->id = $id;
+                    $course->name = $name;
+                    $course->weekdayName = $weekdayName;
+                    $course->weekdayNumber = $this->getDayNum($weekdayName);
+                    $course->sectionStart = $sectionStart;
+                    $course->sectionEnd = $sectionEnd;
+                    $course->totalSection = $sectionTotal;
+                    $course->startTime = $this->getTimeStart($sectionStart);
+                    $course->endTime = $this->getTimeEnd($sectionEnd);
+                    $course->room = $room;
+                    $course->teacherCode = $teacherCode;
+                    $course->teacherName = $teacherName;
+                    $course->group = 0;
+
                     $listResult[] = $course;
                 }
+            }
+
+            // Group lại môn học theo mã môn
+            $courseCount = count($listResult);
+            for ($i = 0; $i < $courseCount - 1; $i++) {
+                for ($j = $i + 1; $j < $courseCount; $j++) {
+                    if ($listResult[$i]->id < $listResult[$j]->id) {
+                        $temp = $listResult[$i];
+                        $listResult[$i] = $listResult[$j];
+                        $listResult[$j] = $temp;
+                    }
+                }
+            }
+
+            // Đánh số theo group môn
+            $group = 1;
+            $preId = $listResult[0]->id;
+
+            for ($i = 0; $i < $courseCount; $i++) {
+                if ($preId != $listResult[$i]->id) {
+                    $preId = $listResult[$i]->id;
+                    $group++;
+                }
+                $listResult[$i]->group = $group;
             }
 
             // Get thông tin sinh viên
@@ -169,7 +193,7 @@ class WebController extends Controller
             return response()->json([
                 'code' => 500,
                 'isSuccess' => false,
-                'message' => $e,
+                'message' => $e->getMessage(),
                 'additionalData' => null,
                 'data' => null,
             ]);
