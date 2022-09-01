@@ -100,7 +100,6 @@ td div {
 }
 
 .thead_td {
-  min-width: 135px;
   height: 32px !important;
   text-align: center;
   padding: 6px 0;
@@ -113,6 +112,8 @@ td div {
 .col_basic {
   background-color: var(--basic-col-color);
   opacity: .6;
+  width: 139px !important;
+  height: 38px !important;
 }
 
 .stt {

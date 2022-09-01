@@ -1,9 +1,6 @@
 <?php
 
-use App\Models\Block;
-use Illuminate\Http\Request;
+use App\Http\Controllers\WebController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('getTimeTableByStudentId/{id}', function () {
-    return Block::all();
-});
+Route::get('getTimeTableByStudentId/{id}', [WebController::class, 'getTimeTableByStudentId']);

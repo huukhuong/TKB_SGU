@@ -3,7 +3,11 @@ const id = $('#id').val();
 fetch(`/api/getTimeTableByStudentId/${id}`)
   .then(jsonText => jsonText.json())
   .then(json => {
-    console.log(json);
+    $('#loading').hide();
+
+    console.log('Response', json);
+
+    drawSchedule([]);
   })
   .catch(e => {
     console.log(e);
@@ -16,15 +20,15 @@ const randomIntFromInterval = (min, max) => {
 const drawSchedule = (arr) => {
   console.log("Begin draw");
 
-  let studentInfo = $('#studentInfo');
-  studentInfo.html(
-    '<span class="text-mutted">MSSV: </span>' +
-    '<span class="info-text-color">' + arr[arr.length - 1].name + '</span>' +
-    '<span class="text-mutted space_left">Họ tên: </span>' +
-    '<span class="info-text-color">' + arr[arr.length - 1].day + '</span>' +
-    '<span class="text-mutted space_left">Lớp: </span>' +
-    '<span class="info-text-color">' + arr[arr.length - 1].start + '</span>'
-  );
+  // let studentInfo = $('#studentInfo');
+  // studentInfo.html(
+  //   '<span class="text-mutted">MSSV: </span>' +
+  //   '<span class="info-text-color">' + arr[arr.length - 1].name + '</span>' +
+  //   '<span class="text-mutted space_left">Họ tên: </span>' +
+  //   '<span class="info-text-color">' + arr[arr.length - 1].day + '</span>' +
+  //   '<span class="text-mutted space_left">Lớp: </span>' +
+  //   '<span class="info-text-color">' + arr[arr.length - 1].start + '</span>'
+  // );
   for (let i = 0; i < arr.length - 1; i++) {
     arr[i].start = parseInt(arr[i].start);
     arr[i].total = parseInt(arr[i].total);
