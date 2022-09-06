@@ -3,6 +3,7 @@ Mã nguồn website tra cứu thời khóa biểu theo tuần trường Đại h
 
 ### Công cụ sử dụng:
 + Ngôn ngữ: PHP, JavaScript
++ Framework: Laravel 8
 + Crawl data: simple_html_dom
 + Hosting: 123host.vn
 
