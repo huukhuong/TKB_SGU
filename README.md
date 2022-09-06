@@ -15,7 +15,7 @@ Giờ thì chỉ có Chúa mới biết!
 Vì thế, nếu bạn muốn cải tiến chương trình này nhưng gặp nhiều bug (khả năng cao là bạn sẽ gặp)
 Thì hãy tăng giá trị của biến bên dưới lên để cảnh báo cho người tiếp theo!
 
-int total hours_wasted here = 15;
+int total hours_wasted here = 20;
 
           _.-/`)
          // / / )
